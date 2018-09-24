@@ -1,0 +1,14 @@
+<html>
+<head><link rel="stylesheet" href="pomodoro.css" type="text/css"></head>
+<body>
+<div class="main">
+	<div onclick="start()" id="out" >Start/Stop</div><br>
+	<div class="buttons">
+	<button onclick="sub('slength')">-</button><input readonly id="slength" type="text" name="sLength" value="3"><button onclick="add('slength')">+</button>Session length<font size="4">(min)</font><br>
+	<button onclick="sub('blength')">-</button><input readonly id="blength" type="text" name="bLength" value="1"><button onclick="add('blength')">+</button>Break length<font size="4">(min)</font>
+	</div>
+</div>
+<script type="text/javascript" src="pomodoro.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<html>
+<head>
+	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+	<link rel="stylesheet" href="simon.css" type="text/css"></head>
+	<body>
+	<div class="quarter-cir">
+       <div  onmousedown="mouseDownUser('green')" onmousedown="mouseDown('green')" onmouseup="mouseUp('green')" onclick="checker()" id="green" class="cir green"></div>
+       <div  onmousedown="mouseDownUser('blue')" onmousedown="mouseDown('blue')" onmouseup="mouseUp('blue')"onclick="checker()" id="blue" class="cir blue"></div>
+       <div  onmousedown="mouseDownUser('yellow')" onmousedown="mouseDown('yellow')" onmouseup="mouseUp('yellow')" onclick="checker()" id="yellow" class="cir yellow"></div>
+       <div  onmousedown="mouseDownUser('red')"onmousedown="mouseDown('red')" onmouseup="mouseUp('red')" onclick="checker(n)" id="red" class="cir red"></div>
+  </div>
+	<div class="inside">SIMON
+		<div id="count" type="text" name="count">Score: 0</div>
+		<div class="start">
+			<span style="font-size: 15px;">start</span>
+			<button onclick="get_way(), show_way()" id="bstart"></button>
+			<span style="font-size: 15px;">strict <input type="checkbox" id = "strict"> </span>
+		</div>
+	</div>
+	<div class="cborder"></div>
+	<div class="crossv"></div>
+	<div class="crossh"></div>
+<div id="help"></div>
+
+	<audio id="agreen" src="green.mp3" ></audio>
+	<audio id="ared" src="red.mp3" ></audio>
+	<audio id="ayellow" src="yellow.mp3" ></audio>
+	<audio id="ablue" src="blue.mp3" ></audio>
+	<audio id="awrong" src="wrong.mp3"></audio>
+	<script type="text/javascript" src="simon.js"></script>
+	</body>
+</html>

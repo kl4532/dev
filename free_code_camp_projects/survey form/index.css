@@ -1,0 +1,51 @@
+body{
+  margin: auto;
+  text-align: center;
+  background-color: gray;
+}
+#title {
+  margin: auto;
+  padding: 20px 20px 0px 20px;
+  width: 600px;
+  min-width: 500px;
+}
+#description{
+  font-size: 20px;
+}
+.main{
+  margin: auto;
+  color: white;
+  background-color: brown;
+  width: 600px;
+  min-width: 500px;
+  padding: 20px 20px 20px 20px;
+}
+
+.colLeft{
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+  text-align: right;
+  vertical-align: top;
+  margin: 10px;
+}
+.colRight{
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  text-align: left;
+  vertical-align: top;
+}
+#number{
+  width: 50px;
+  min-width: 40px;
+}
+textarea{
+  max-width: 250px;
+}
+button{
+  margin: 10px 0px 0px 10px;
+  padding: 10px;
+  border-radius: 22px;
+  width: 70px;
+}

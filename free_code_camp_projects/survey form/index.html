@@ -1,0 +1,98 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="index.css" type="text/css">
+	 <meta charset="UTF-8">
+</head>
+
+<body>
+<div>
+	<h1 id="title">Survey Form</h1>
+</div>
+	<div class="main">
+
+		<p id="description">This is the music preferece survey </p>
+		<hr>
+		<form id="survey-form" method="get">
+			<div class="colLeft">
+				<label id="name-label" for="name">Name: </label>
+			</div>
+			<div class="colRight">
+				<input id="name" type="text" name="name" required placeholder="Enter your name">
+
+        </div><br>
+
+			<div class="colLeft">
+				<label id="email-label" for="email">Email: </label>
+			</div>
+			<div class="colRight">
+				<input id="email" type="email" name="email" required placeholder="Enter your email">
+
+        </div><br>
+
+			<div class="colLeft">
+				<label id="age-label" for="age">Age: </label>
+			</div>
+			<div class="colRight">
+				<input id="number" type="number" min="1" max="123"  name="email" required placeholder="Age">
+
+        </div><br>
+
+			<div class="colLeft">
+				<label id="dropdown-label" for="dropdown">What kind of music you like  to listen the most?: </label>
+			</div>
+			<div class="colRight">
+				<select onclick="checkSelect();" id="dropdown" required>
+                          <option disabled selected value>  select an option </option>
+                          <option value="Pop">Pop</option>
+                          <option value="Rock">Rock</option>
+                          <option value="Electronic">Electronic</option>
+                          <option value="Classical">Classical</option>
+                  </select>
+			</div><br>
+
+			<div class="colLeft">
+				<label id="instrument-label" for="instrument">Do you play on instrument? </label>
+			</div>
+			<div id="instrument" class="colRight" name="instrument">
+				<input id="radioYes" onclick="checkRadio();" type="radio"  value="yes"> Yes
+				<input id="radioNo" onclick="checkRadio();" type="radio"  value="no"> No
+
+        </div><br>
+			<hr>
+
+			<div class="colLeft">
+				<label id="instrument-label" for="instrument">Select artist/band you know:</label>
+			</div>
+			<div id="band" class="colRight">
+				<input type="checkbox" value="empty"/>
+				<label for="GeronimoJackson">---</label><br>
+
+				<input type="checkbox" value="empty"/>
+				<label for="scales">---</label><br>
+
+				<input type="checkbox" value="empty"/>
+				<label for="scales">---</label><br>
+
+				<input type="checkbox" value="empty"/>
+				<label for="scales">---</label><br>
+
+         </div>
+			<hr>
+
+			<div class="colLeft">
+				Additional comments?
+			</div>
+			<div class="colRight">
+				<textarea rows="4" cols="30" name="comment" form="usrform" placeholder="Enter comment here...">
+
+</textarea>
+			</div><br>
+
+			<button type="submit" form="survey-form" value="Submit">Submit</button>
+		</form>
+	</div>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

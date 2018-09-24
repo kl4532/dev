@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link rel="stylesheet" href="calc.css" type="text/css">
+</head>
+<body>
+ <div class="frame">
+		<div class="btn-group" style="width:100%">
+			<input  id="out" type="text" >
+			<input  id="all" type="text">
+			<button onclick="clean('out')"id="bc" style="width:25%">C</button>
+			<button onclick="clean('out'), clean('all')"id="bce" style="width:25%">CA</button>
+			<button class="mem" onclick="mem()" id="mem" style="width:12.5%">M</button>
+			<button class="mem" onclick="memc()" id="memc" style="width:12.5%">CM</button>
+			<button onClick="show('divide'), calculator('divide'), clean('out')" id="divide" style="width:25%">/</button>
+			<br>
+			<button onClick="show('b7'), calculator('b7')" id="b7"  style="width:25%">7</button>
+			<button onClick="show('b8'), calculator('b8')" id="b8"  style="width:25%">8</button>
+			<button onClick="show('b9'), calculator('b9')" id="b9"  style="width:25%">9</button>
+			<button onClick="show('multi'), calculator('multi'), clean('out')"" id="multi" style="width:25%">*</button>
+			<br>
+			<button onClick="show('b4'), calculator('b4')" id="b4" style="width:25%">4</button>
+			<button onClick="show('b5'), calculator('b5')" id="b5" style="width:25%">5</button>
+			<button onClick="show('b6'), calculator('b6')" id="b6" style="width:25%">6</button>
+			<button onClick="show('minus'),  calculator('minus'), clean('out')"" id="minus" style="width:25%">-</button>
+			<br>
+			<button onClick="show('b1'), calculator('b1')" id="b1" style="width:25%">1</button>
+			<button onClick="show('b2'), calculator('b2')" id="b2" style="width:25%">2</button>
+			<button onClick="show('b3'), calculator('b3')" id="b3" style="width:25%">3</button>
+			<button onClick="show('plus'), calculator('plus'), clean('out')"" id="plus" style="width:25%">+</button>
+			<br>
+			<button onClick="show('b0'), calculator('b0')"  id="b0" style="width:25%">0</button>
+			<button onClick="show('dot'), calculator('dot')" id="dot" style="width:25%">.</button>
+			<button onClick="show('eq'), clean('out'), end()" id="eq" style="width:50%">=</button>
+
+		</div>
+      
+ </div>
+<script type="text/javascript" src="calc.js">
+</script>
+</body>
+
+</html>

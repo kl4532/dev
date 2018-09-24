@@ -1,0 +1,653 @@
+<html>
+	<head>
+	<meta charset="utf-8"/> </head>
+  <body onload="rounder()";>
+   
+	  <style>
+      /* background-image: url("http://www.madness-inc-too.com/alisgia-waya/backgrounds/background%2035.png");*/
+body{ 
+  background-color: white;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: auto;
+  margin-left: 0%;
+  background-image: url("/images/backgroundsky.png");
+}
+.blockquote {
+    
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+.contact{
+  border-bottom: 4px solid grey;
+  border-top: 3px solid grey;
+  text-align: center;
+  padding: 2%;
+  font-size: 17px;
+  background-color: rgba(215, 231, 153, 0.5);
+  color: #0066ff;
+  word-wrap: break-word;
+}
+#icon{
+  display: inline-block;
+  height: auto;
+  min-width: 15%;
+  max-width: 20%;
+  padding-left:0%;
+  margin-left:0%;
+}
+#heado{
+  width:100%;
+  height: 5%;
+  background-color: rgba(215, 231, 153, 0.5);
+  border-top: solid grey;
+  border-bottom: solid grey;
+  margin-left:0%; 
+  padding-bottom: 0%;
+  color:black;
+  overflow: hidden; 
+}
+.headtxt{
+  display:inline-block;
+  float:right;
+  font-size:150%;
+  text-align: right; 
+  overflow: auto; 
+  margin-left: 0%;
+  width: 65%;
+  max-heigth:20%;
+  min-width: 65%;
+  padding-top: 2%;
+  padding-right: 2%;
+}
+#name{
+  margin-top: 2%; 
+  font-size:35px; 
+  color:black; 
+  padding-right: 0%; 
+  padding-bottom: 0%;
+  
+}
+#title{
+  margin-bottom: 1%; 
+  font-size:18px; 
+  color:black; 
+  margin-top: -15px;
+  padding-bottom:0%;
+  overflow: auto;
+}
+
+#content{
+  display: inline-block;
+  float: right;
+  margin-left: 2.2%;
+  overflow: auto;
+  height:85%;
+  width: 100%;
+  min-width: 10%;
+  max-width:77.5%;
+  position: absolute;
+}
+.under{
+  min-width: 10%;
+  max-width: 100%
+}
+.navigation {
+
+    display: inline-block;
+    height: 30%;
+    width:20%;
+    min-width: 20%;
+    max-width: 30%;
+    margin-top: 0%;
+    
+    border-right: solid grey;
+    z-index:0;
+} 
+.mainmenu, .submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mainmenu a {
+  display: block;
+  background-color: rgba(215, 231, 153, 0.5);
+  font-size: 20px;
+  outline: none;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding: 8px 16px;
+}
+.mainmenu a:hover {
+    background-color: rgba(0,128,255, 0.3);
+}
+.mainmenu li:hover .submenu {
+  display: block;
+  max-height: 500px;
+  
+}
+.submenu a {
+  background-color: rgba(115, 231, 153, 1); /* green */
+  text-align: center;
+  font-size: 15px;
+   height: auto;
+}
+.submenu a:hover {
+  background-color: rgba(0,178,255, 1);
+  
+}
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.1s ease-out;
+}
+.txtbox{
+  width: 50%; 
+  height: auto;
+  border: 2px solid grey;
+  margin-left: 10%;
+  padding: 0.5%;
+  font-size: 25px;
+  text-align: center
+}
+
+
+#bmicalc{
+    margin: 0%;
+    width: 100%;
+}
+.button{
+    background-color: grey; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 4%;
+    border-radius: 7px;
+}
+.floating-box {
+    float: left;
+    width: 30%;
+    height: auto;   
+}
+#diety{
+}
+.dietimg{
+  float: right;
+  width: 35%;
+  heigth: 35%;
+  margin-left:2%;
+  margin-right:2%;
+}
+.list{
+  font-size: 20px;
+  color: #373636;
+}
+.dyplomy{
+  width: 35%;
+  heigth: 35%;
+  margin: 2%;
+}
+p{
+  font-size: 20px;
+  line-height: 130%;
+  color: #373636;
+}
+.contact-page{
+  font-size: 24px;
+  text-align: center;
+}
+mark.black{
+  color: black;
+  background: none;
+}
+
+
+    </style>
+    <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script>function cbmi() //BMI
+{
+  var kg, cm, bmi, comment;
+  kg = document.getElementById('kg').value;
+  cm = document.getElementById('cm').value;
+  comment = "default";
+  if(kg.indexOf(",")!=-1)
+    {
+      kg=kg.replace(",",".");
+    }
+  kg= Number(kg);
+  cm= Number(cm);
+  bmi = kg/((cm*cm)/10000); 
+if(Number.isNaN(bmi)==true || bmi<5 || bmi>150)
+{
+  document.getElementById('bmires').innerHTML ="Ups,"
+}else
+  {
+    document.getElementById('bmires').innerHTML = "Twoje BMI: " + rounder(bmi,2) + " -";
+  }
+  if(bmi<18.5 && bmi>5)
+    {
+      comment = " niedowaga";
+      document.getElementById('comment').style.color = "orange";
+      document.getElementById('comment').innerHTML = comment; 
+    }else if(bmi>=18.5 && bmi< 24.99)
+      {
+        comment = " posiadasz prawidłową wagę, graulacje!";
+        document.getElementById('comment').style.color = "green";
+        document.getElementById('comment').innerHTML = comment;
+      }else if(bmi>=24.99 && bmi< 30)
+        {
+          comment = " masz nadwagę - pomyśl nad odchudzaniem!";
+        document.getElementById('comment').style.color = "orange";
+        document.getElementById('comment').innerHTML = comment; 
+        }else if(bmi>=30 && bmi<35)
+          {
+            comment = " I stopień otyłości - czas schudnąć"; document.getElementById('comment').style.color = "red";
+        document.getElementById('comment').innerHTML = comment; 
+}else if(bmi>=35 && bmi<40)
+          {
+            comment = " II stopień otyłości - musisz schudnąć!"; document.getElementById('comment').style.color = "red";
+        document.getElementById('comment').innerHTML = comment; 
+}else if(bmi>=40 && bmi<=150)
+          {
+            comment = " III stopień otyłości - podejmij leczene natychmiast!"; document.getElementById('comment').style.color = "red";
+        document.getElementById('comment').innerHTML = comment; 
+}else if(bmi<5 || bmi>150)
+  {
+    comment = " coś poszło nie tak... sprawdź dane";
+    document.getElementById('comment').style.color = "black";
+    document.getElementById('comment').innerHTML = comment;
+    
+  }
+  else
+    {
+        comment = " wprowadź poprawną wartość";
+        document.getElementById('comment').style.color = "black";
+        document.getElementById('comment').innerHTML = comment; 
+}
+       
+}
+
+function cwhr() // WHR
+{
+  var cmt, cmb, whr;
+  cmt = document.getElementById('cmt').value;
+  cmb = document.getElementById('cmb').value;
+  cmt = Number(cmt);
+  cmb = Number(cmb);
+  whr = cmt/cmb; 
+  if(whr==Infinity){
+    document.getElementById('whrres').innerHTML = "Wypełnij wszystkie pola";
+  }else
+  if(document.getElementById('man').checked) {
+    if((whr>=1 || cmt>100) && whr<5)
+      {
+        document.getElementById('whrres').innerHTML = "WHR: " + rounder(whr,2) + ", typ otyłości: " + "otyłość brzuszna(typu jabłko)";
+      }else if(whr<1 && whr>0) 
+        {
+          document.getElementById('whrres').innerHTML = "WHR: " + rounder(whr,2) + ", typ otyłości: " + "otyłość pośladkowo-udowa (typu gruszka)";
+        }else{
+          document.getElementById('whrres').innerHTML = "WHR: " + rounder(whr,2) + ", typ otyłości: " + "coś poszło nie tak... popraw dane";
+        }
+    
+}else if(document.getElementById('woman').checked) {
+  if(whr>=0.85 || cmt>0.88)
+      {
+        document.getElementById('whrres').innerHTML = "WHR: " + rounder(whr,2) + ", typ otyłości: " + "otyłość brzuszna(typu jabłko)";
+      }else if(whr<0.85 && whr>0)
+        { 
+          document.getElementById('whrres').innerHTML = "WHR: " + rounder(whr,2) + ", typ otyłości: " + "otyłość pośladkowo-udowa (typu gruszka)";
+        }else{
+          document.getElementById('whrres').innerHTML = "Coś poszło nie tak... popraw dane";
+        }
+}else{
+  document.getElementById('whrres').innerHTML = "Wybierz płeć!";
+}
+}
+function rounder(n,k) // Round number
+{
+    var factor = Math.pow(10, k+1);
+    n = Math.round(Math.round(n*factor)/10);
+    return (n/(factor/10));
+}
+</script>
+    </head>
+    
+    <header> 
+      <div id="heado">
+        <img id="icon" src="/images/logo.png">
+      <span id="container">
+          <span class="headtxt">
+    <p id="name">PORADNICTWO ŻYWIENIOWO-DIETETYCZNE</p>
+            <p id="title">mgr inż. Małgorzata Łukasiak</p>
+        </span> 
+
+      </span>
+      </div>
+    </header>  
+    <div class="under">
+<nav class="navigation">
+  <ul class="mainmenu">
+  <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#diety">Diety</a>
+     <ul class="submenu">
+        <li><a href="#Dtodchudz">Dieta odchudzająca</a></li>
+        <li><a href="#Dtchol">Dieta obniżająca poziom cholesterolu</a></li>
+        <li><a href="#Dtciaz">Dieta w ciąży</a></li></li>
+      <li><a href="#Dtcukr">Dieta w cukrzycy insulino zależnej</a></li>
+    <li><a href="#Dtnt">Dieta w nadciśnieniu tętniczym</a></li>
+    <li><a href="#Dtbg">Dieta bezglutenowa</a></li>
+    <li><a href="#Dtwdm">Dieta w dnie moczanowej</a></li>
+      </ul>
+    <li><a href="#wsk">Wskaźniki masy ciała</a>
+       <ul class="submenu">
+        <li><a href="#BMI">BMI</a></li>
+        <li><a href="#WHR">WHR</a></li>
+      </ul>
+  <li><a href="#sport">Ruch to zdrowie</a></li>
+  <li><a href="#about">O mnie</a></li>
+  <li><a href="#contact">Konsultacje</a></li>
+</ul> 
+      <div class="contact">
+        <mark class="black">telefon: </mark>604 893 862<br>
+ <mark class="black"> e-mail: </mark><br>malgorzatalukasiak@onet.eu
+    </div>
+</nav>
+
+<div id="content" >
+    <div id="home">
+      <h1 style="margin-top:0px;">Dlaczego warto?</h1>
+      <img class="dietimg" style="float:left;"src="/images/evolution_weight_loss_female.png">
+      <h3 class= "blockquote">„Powiedz mi co jesz, a powiem Ci kim jesteś”</h3>
+      <h4 style="margin:0%; margin-right:5%; float:right;">- Anthelme Brillat-Savarin</h4> 
+      <div style="clear:right;">
+      </div>
+      <p> 
+        Jedzenie jest nieodzowną częścią naszego życia. To nie tylko zaspokajanie naszych potrzeb fizjologicznych, ale także sposób na sprawienie sobie przyjemności, okazja do spotkania w ulubionym miejscu i w dobrym towarzystwie. Dobrze jest wiedzieć dlaczego warto zdrowo się odżywiać, ponieważ ma to przełożenie na nasze zdrowie i dobre samopoczucie.   
+   </p>
+      <div style="clear:left;">
+      </div>
+    </div>
+    <div id="diety">
+      <h2>Oferta - zakres konsultacji</h2>
+      <p> Uzyskasz  ode mnie rzetelne porady dietetyczne i skuteczną pomoc w zakresie żywienia. Wspieram osoby chcące zmienić swój sposób odżywiania. Moje doświadczenie zdobyte w ciągu 30 lat pracy w zawodzie dietetyka oraz  dokształcanie się sprawią, że zaufasz mi i zmienisz swój sposób żywienia na zdrowszy, niż ten dotychczasowy. Spróbuj i uwierz, że bez wyrzeczeń można zdrowiej żyć. Zapraszam do zapoznania się z moją ofertą oraz tym, czym jest prawidłowe żywienie i dlaczego jest tak ważne w naszych życiu.</p> <p>Zakres moich konsultacji:</p>
+      <ul class="list">
+        <li>skuteczna dieta odchudzająca</li>
+        <li>dieta obniżająca poziom cholesterolu</li>
+        <li>dieta w ciąży</li>
+        <li>dieta w cukrzycy insulino zależnej</li>
+        <li>dieta regulująca prawidłowy poziom cukru</li>
+        <li>dieta w nadciśnieniu</li>
+        <li>dieta bezglutenowa</li>
+        <li>inne diety w chorobach,  np. w dnie moczanowej, chorobach żołądka i dwunastnicy, tarczycy, wątroby i trzustki, </li>
+      </ul>
+    </div>
+  <div id="diety">
+  <div id="Dtodchudz">
+    <h2>Dieta odchudzająca</h2>
+    <img class="dietimg" src="/images/weight-loss-image01.png">
+     <p>Otyłość jest chorobą ogólnoustrojową. Ludzie tyją, ponieważ pobierają znacznie więcej energii z pożywienia, niż potrzebują do prawidłowego funkcjonowania. Nadmiar energii gromadzi się w organizmie w postaci tkanki tłuszczowej. Przyczyną otyłości może być wiele czynników, najważniejsze z nich to: rodzinny, zaburzenia hormonalne i środowiskowe. Powikłania  otyłości są znane, co zrobić aby do nich nie doszło? Należy zmienić sposób żywienia i styl życia. Zacznij już od dziś, nie czekaj do jutra. <b>Pamiętaj drogi Pacjencie- nie ma diety cud, jest odpowiedni sposób odżywiania. </b> Wskażę Ci, jak skutecznie zmniejszyć nadmiar zbędnych kilogramów, a efektem tego będzie Twoje dobre zdrowie i znakomite samopoczucie! Za pomocą analizatora składu ciała, dokonam następujących  pomiarów antropometrycznych:</p>
+    <ul class="list">
+       <li>masy tkanki tłuszczowej</li>
+      <li>procentowej zawartości tkanki tłuszczowej</li>
+      <li>masy tkanki mięśniowej</li>
+      <li>całkowitej zawartości wody w organizmie (woda zewnątrzkomórkowa, woda wewnątrzkomórkowa)</li>
+      <li>beztłuszczowej masy ciała</li>
+      <li>masy mineralnej kości</li>
+      <li>wskaźnika trzewnej tkanki tłuszczowej</li>
+      <li>wskaźnika podstawowej przemiany materii</li>
+      <li>wieku metabolicznego</li>
+    </ul>
+    <div style="clear:right;">
+    <img class="dietimg" src="/images/slide_04.png">
+    <p>
+      Znajomość ww. parametrów i odpowiednia dieta, są najlepszym sposobem na bezpieczną, prawidłową i trwałą utratę zbytecznych kilogramów.</p>
+    <p>
+Analizator działa w oparciu o nieinwazyjną technologię analizy składu masy ciała – bioimpedancję elektryczną (BIA) polegającą na pomiarze oporu elektrycznego poszczególnych tkanek organizmu, co w efekcie dostarcza danych ilościowych o tkance tłuszczowej, tkance mięśniowej, tkance kostnej i beztłuszczowej masie ciała. Analizator TANITA spełnia wymagania europejskiej dyrektywy NAWI, odnoszącej się do systemu ważenia.
+    </p>
+      <div style="clear:right;">
+  </div>
+  <div id="Dtchol">
+    <h2>Dieta obniżająca poziom cholesterolu</h2>
+   <img style="float: left; width: 25%;
+    heigth: 25%;" class="dietimg" src="/images/HealthyHeart.png">
+        <p><br>Cholesterol to substancja tłuszczowa obecna we wszystkich komórkach i krwi. Konieczny jest dla utrzymania zdrowia, ale zbyt duże jego ilości w organizmie zwiększają ryzyko rozwoju miażdżycy                 i jej późniejszych powikłań: choroby wieńcowej, zawału serca czy udaru mózgu.                                           Z cholesterolem (podobnie  jak z ludźmi)  jest tak, że jest <i>dobry</I> – HDL (z ang. high density lipoproteins) i <i>zły</i> – LDL (z ang. low density lipoproteins). Ludzie, którzy jedzą w nadmiarze produkty bogate w tłuszcze zwierzęce (wyjątek stanowi tłuszcz ryb) są najbardziej narażeni na wysoki poziom cholesterolu, właśnie tego <i>złego</i>. <br> <b>Wysoki poziom cholesterolu, powyżej pożądanych wartości stanowi ryzyko miażdżycy, choroby niedokrwiennej serca, zawałów.</b> Ryzyko podwyższonego stężenia cholesterolu stwierdza się często u osób jedzących w nadmiarze tłuszcze zwierzęce  (wyjątek stanowi tłuszcz pozyskiwany z ryb). Gdy poziom cholesterolu lekko przekracza normę, pierwsze, co możesz zrobić, to zmienić sposób odżywiania. Często wyniki poprawiają się już po 3 miesiącach stosowania diety hipolipemicznej (antycholesterolowej).Ode mnie uzyskasz informacje, jak  jeść i co jeść, by obniżyć poziom cholesterolu. Zaproponuję Ci dietę obniżającą cholesterol. Dieta jest układana indywidualnie dla każdego Pacjenta. Odpowiednio zbilansowana dieta przynosi widoczne i odczuwalne dla zdrowia efekty. <b>Już po 2-3 miesiącach stosowania diety zauważysz w badaniach laboratoryjnych znaczny spadek cholesterolu.</b>
+    </p>
+    <ul class="list">
+      <p>Aby nie narażać się na choroby wynikające z nadmiaru cholesterolu koniecznie: </p>
+      <li>zmień złe nawyki żywieniowe i styl życia</li>
+      <li>zastosuj dietę ze zwiększoną zawartością tłuszczów roślinnych</li>
+      <li>włącz do jadłospisu razowe pieczywo, kaszę gryczaną, warzywa  i owoce</li>
+      <li>ogranicz do minimum tłuszcze zwierzęce, cukier i  słodycze</li>
+    </ul>
+    <p>Zmiana stylu życia wiąże się z aktywnością fizyczną, która zmniejszy stres, wyszczupli Twoją sylwetkę i poprawi samopoczucie. Stosowanie <b>diety hipolipemicznej</b>(o niskim poziomie cholesterolu)  w naturalny sposób obniży jego poziom i pozwoli Ci zdrowiej żyć. </p>
+    
+        <div style="clear:left;">
+  </div>
+  <div id="Dtciaz">
+    <h2>Dieta w ciąży</h2>
+    <img style="float: right; width: 20%;
+    heigth: 25%;" class="dietimg" src="/images/mums-and-dads-pregnant-lady.png">
+    <p>Zachodzące w organizmie kobiety zmiany związane z ciążą, takie jak wzrost objętości krwi czy powiększanie się macicy w miarę rozwoju dziecka, warunkują stopniowy przyrost masy ciała. Dla optymalnego rozwoju płodu duże znaczenie ma zarówno prawidłowa masa ciała matki przed zapłodnieniem, jak również przyrost masy ciała podczas ciąży. 
+      <br>
+      Zapotrzebowanie na energię w I trymestrze ciąży nie zmienia się, dopiero w II i III zwiększa się w stosunku do zapotrzebowania przed ciążą. Istotny jest odpowiedni poziom spożycia głównych składników odżywczych (białka, tłuszczu, węglowodanów, minerałów i witamin). 
+      <br><br>
+      <b>Jeśli spodziewasz się dziecka - pamiętaj:</b>
+      <ul class="list">
+        <li>ważne są 3 główne posiłki i 2 posiłki uzupełniające</li>
+        <li>niekorzystne dla organizmu kobiety ciężarnej jest podjadanie</li>
+        <li>najwięcej energii powinny dostarczać śniadanie i obiad</li>
+        <li>posiłki powinny być spożywane o stałych porach</li>
+        <li>nie należy zapominać o dostarczeniu odpowiedniej ilości płynów</li>
+        <li>różnorodność spożywanych posiłków zapobiega niedoborom pokarmowym, które podczas ciąży często się zdarzają</li>
+    </ul>
+    </p>
+    <div style="clear:right;">
+  </div>
+  <div id="Dtcukr">
+    <h2>Dieta w cukrzycy insulino zależnej</h2>
+    <img style="width: 30%;
+    heigth: 15%; float:left;" class="dietimg" src="/images/Manage-Diabetes-With-Diet-and-Exercise2-1024x535.png">
+    <p>
+       Żywienie chorych z cukrzycą insulinozależną nie odbiega od żywienia ludzi zdrowych. Planując jadłospis należy jedynie przestrzegać ilości wymienników węglowodanowych i ich rozkładu na posiłki, w zależności od rodzaju i dawek insuliny. Każdego Pacjenta nauczę, jak to zrobić w prosty sposób.  Poznając mechanizm stosowania wymienników węglowodanowych Pacjent unika przewlekłych powikłań w tej chorobie (uszkodzenie wzroku, nerek, miażdżyca tętnic, zaburzenia sercowo-naczyniowe). Ważny jest dobór i ilość spożywanych produktów żywnościowych, przedstawię Ci te zasady w postaci piramidy doboru produktów.</p>
+    <div style="clear:left;">
+  </div>
+   <div id="Dtnt">
+    <h2>Dieta w nadciśnieniu tętniczym</h2>
+     <img style="width: 20%;
+  heigth: 20%; float: right;" class="dietimg" src="/images/Untitled-3-01.png">
+     <p>Czy wiesz, że w Polsce na nadciśnienie tętnicze choruje około <b>8 mln osób! </b>To stale rosnące zjawisko      i niebezpieczne, ponieważ zagraża ludzkiemu życiu. W nadciśnieniu tętniczym ograniczenie energii do <b>1700-2200 kcal</b> wpływa korzystnie na jego obniżenie. Prosta dieta, która ogranicza w żywieniu <i>złe tłuszcze</i>  znacząco normuje ciśnienie, a tym samym przyśpiesza proces zdrowienia. </p>
+     <p>Ważne w diecie są  produkty, które obniżają poziom ciśnienia</p>
+     <ul class="list">
+       <li>do takich prodkuktów zaliczamy: czosnek, estragon, natka pietruszka, koperek, banany, brzoskwinie, czarna porzeczka. Należy je wpisać w codzienny jadłospis każdego, kto ma nadciśnienie tętnicze. Produkty te są ogólnodostępne na rynku  i możemy po nie sięgać przez cały rok</li>
+       <li>posiłki powinny być <i>lekkie</i>, nie obciążające przewodu pokarmowego (ogranicz potrawy smażone, ciężkostrawne z dużą zawartością tłuszczów zwierzęcych)</li>
+       <li>ogranicz sól, kawę, napoje typu cola, alkohol, chipsy, produkty kiszone, sery żółte</li>
+       <ul>
+         <p>Redukcja masy ciała sprzyja obniżeniu nadciśnienia, zaproponuję Ci dietę, która będzie prosta        w zastosowaniu i przyniesie oczekiwane efekty zdrowotne.</p>
+     <div style="clear:right;">
+         </div>
+  </div>
+  <div id="Dtbg">
+    <h2>Dieta bezglutenowa</h2>
+    <img style="float:left; width: 20%;
+  heigth: 20%;"class="dietimg" src="/images/gluten_free.png">
+    <p>Dietę bezglutenową powinny stosować osoby cierpiące na celiakię, chorobę Duhringa oraz osoby mające alergię lub nadwrażliwość na gluten. <b>Zastosowanie diety bezglutenowej wskazane jest tylko w potwierdzonych przypadkach tych przypadłości.</b> Wykluczenie glutenu powoduje ustąpienie wcześniej opisanych objawów w przypadku alergii a osobom z celiakią pozwala normalnie żyć i dzieciom dobrze się rozwijać.                                                                          <br>Osoby zdrowe, które nie mają żadnych z wymienionych wyżej chorób nie powinny wykluczać glutenu z diety bez uzasadnienia. Mąki bezglutenowe mają dużo mniej białka, witamin z grupy B oraz składników mineralnych, jak choćby magnez, żelazo, cynk czy miedź niż ich glutenowe odpowiedniki. W diecie bezglutenowej jest także dużo mniej błonnika pokarmowego, a więcej cukru i często też tłuszczu. Może to powodować powstawanie problemów z wypróżnianiem się czy też inne kłopoty z przewodem pokarmowym.</p>
+    <div style="clear:left;">
+  </div>
+   <div id="Dtwdm">
+    <h2>Dieta w dnie moczanowej</h2>
+     <img style="width: 20%;
+  heigth: 20%;"class="dietimg" src="/images/Gout.png">
+     <p>Dna (podagra: skaza moczanowa) jest choroba metaboliczną polegająca na odkładaniu się kwasu moczowego we krwi. Jedną z przyczyn jest niewłaściwa dieta, ale również stres, niektóre leki i zwiększony wysiłek fizyczny.  Leczenie dietetyczne polega na zastosowaniu diety ubogo purynowej, w której ważny jest dobór produktów i sposób ich przygotowania. Wskażę, jak taką dietę ułożyć i jak ją stosować, aby złagodzić przebieg choroby i uniknąć przewlekłego, wielostawowego zapalenia  w tym schorzeniu, któremu towarzyszą np.  powikłania ze strony układu krążenia i nerek.
+</p>
+     <div style="clear:right;">
+  </div>
+  
+    <div id="wsk">
+      <h1>Wskaźniki masy ciała</h1>
+    </div>
+    </div>
+  <div id="BMI">
+    <h2>BMI</h2>
+    BMI (Body Mass Index) to wskaźnik masy ciała, przeznaczony dla osób dorosłych. Aby obliczyć swój BMI zważ się (najlepiej rano, zanim zjesz śniadanie), zmierz swój wzrost i wstaw te dane poniżej:
+    <br><br>
+    <div id="bmicalc" style="display:inline-block;">
+ <div class="floating-box"> 
+  <div>
+    <span><img style="width: 10%;
+  height: auto;" src="/images/400x400px-kilogram_weight.svg.png"></span>
+    <span><input class= "txtbox" id="kg" type="text" name="kg"> kg</span>
+      </div>
+      
+   <div>
+       <span class="obj"><img style="width: 10%;
+  height: auto;" src="/images/Height-measurement.png"></span>
+       <span class="obj"><input class= "txtbox" id="cm" type="text" name="cm"> cm</span>
+      </div>
+      </div>
+       <div class="floating-box">
+      <div style="position: absolute; margin-top: 1%;" >
+        <span style="font-size: 20px;" id="bmires"></span>
+        <span style="font-size: 20px;" id="comment"></span> 
+      </div>
+      <div style="margin-top:18%;">
+         <button class="button" id = "bmibtn" onclick="cbmi()">Oblicz swoje BMI</button>
+           </div> 
+  <script>
+ document.getElementById("kg")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("bmibtn").click();
+    }
+});
+
+ document.getElementById("cm")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("bmibtn").click();
+    }
+});
+  </script>
+       </div>
+       </div>
+  </div> 
+   
+    
+  <div id="WHR">
+    <h2>Pomiar obwodu pasa i bioder (waist-hip ratio – WHR)</h2><h4 style="color: red">(tylko dla osób z BMI powyżej 25!)</h4>
+    <div style="clear: left;">
+    </div>
+Do rozpoznania typu otyłości służy tzw. wskaźnik WHR. Wskaźnik ten określa lokalizację nadmiaru tkanki tłuszczowej i pozwala wyróżnić dwa główne typy otyłości: otyłość trzewna (charakterystyczna dla mężczyzn), związana z gromadzeniem tkanki tłuszczowej w jamie brzusznej i górnej części ciała oraz otyłość gynoidalna (pośladkowo-udowa), występująca częściej u kobiet.<br>
+      <h4 style="color: red;">Uwaga!</h4>
+      <ul>      
+ <li> obwód w tali należy mierzyć na wysokości pępka </li>
+ <li> obwód w biodrach należy mierzyć na wysokości wystających krętarzy większych, tzn. Na wysokości spojenia łonowego </li>
+    </div>
+      <br>
+   <div id="bmicalc" style="display:inline-block;">
+ <div style="width: 40%;" class="floating-box"> 
+  <div>
+    <span><img style="width: 10%;
+  height: auto;" src="/images/slimming_toning_slim_weight_losswaist-512.png"></span>
+    <span>Obwód w talii&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input style="width: 30%;"class= "txtbox" id="cmt" type="text" name="cmt"> cm</span>
+     
+      </div>
+      
+   <div>
+       <span><img style="width: 10%;
+  height: auto;" src="/images/biodra.png"></span>
+       <span>Obwód w biodrach <input style="width: 30%;"class= "txtbox" id="cmb" type="text" name="cmb"> cm</span>
+      </div>
+   <ul style="list-style-type: none; clear: left; width:100%; margin-left: 45%;">
+    <li><input type="radio" id="man" name="selector">mężczyzna</li> 
+    <li><input type="radio" id="woman" name="selector">kobieta</li>
+        <ul>
+      </div>
+       <div class="floating-box">
+      <div style="position: absolute; margin-top: 1%; width: 100%;" >
+        <span style="font-size: 22px;" id="whrres"></span>
+        <span style="font-size: 22px;" id="comment"></span> 
+      </div>
+      <div style="margin-top:18%;">
+         <button class="button" id = "whrbtn" onclick="cwhr()">Oblicz swoje WHR</button>
+           </div> 
+  <script>
+ document.getElementById("cmt")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("whrbtn").click();
+    }
+});
+
+ document.getElementById("cmb")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("whrbtn").click();
+    }
+});
+  </script>
+      </div>
+    </div>
+    </div>
+    
+    
+    
+   <div id="sport">
+     <h2> Ruch to zdrowie!</h2>
+    <img style="float:right; border:4px solid rgba(0,128,255, 0.5); heigth: 30%; width: 22%;margin-left:2%;
+  margin-right:2%;" src="/images/DSC00071.jpg">
+     <p> Moja <i>przygoda</i> z bieganiem rozpoczęła się 7 lat temu i trwa nadal. Istotną przyczyną podjęcia decyzji o bieganiu była mnogość korzyści wynikających z tego cudownego zjawiska. Tak to nazywam dosłownie. Walory zdrowotne są nieocenione. Jedne z wielu pozytywnych efektów  to: </p>
+     <ul class="list">
+       <li>mocniejszy układ kostny (ważne dla mnie, kobiety 50+, zabezpiecza przeciwko osteoporozie)</li>
+       <li>naturalnie wzmocniony układ mięśniowy</li>
+       <li>biegacze znacznie  rzadziej zapadają na chorobę wieńcową (mają niższe ciśnienie tętnicze i są mniej <i>otłuszczeni</i> )</li>
+       <li>mam zwiększoną wydolność oddechową, nie dostaję zadyszki</li>
+     </ul> 
+     <img style="float:left; border:4px solid rgba(0,128,255, 0.5); width: 16%; margin-left:2%;
+  margin-right:2%;" src="/images/DSC_0035.jpg"><p>Wiele jest efektów zdrowotnych i nowe są odkrywane.  Dla mnie ważne są przede wszystkim aspekty psychiczne. Wydzielają się endorfiny, zwane popularne <i>hormonami szczęścia</i>, to dzięki ich opioidowemu działaniu po bieganiu czuję się weselsza, zrelaksowana i uspokojona, a jednocześnie pobudzona do działania. Nabywam <i>euforii biegacza</i>, które daje mi nowe siły życiowe i radość. Mój dzienny dystans nie jest duży, to tylko parę kilometrów, ale robię to 7 razy w tygodniu. Razem z przygotowaniem zajmuje mi to 50 minut. Tylko tyle, a ileż mam z tego korzyści zdrowotnych i radości życia. Takie małe zjawisko, a tak bardzo raduje moje serce!</p>
+    </div>
+     <div style="clear: left;">
+    </div>
+     <div style="clear: right;">
+    </div>
+   <div id="about">
+      <h2>O mnie</h2>
+      <img style="border: 4px solid green; heigth: 30%; width: 22%; float: left; margin-right: 1%;" src="/images/mama.png" >
+     <h3>Wykształcenie</h3>
+      <p>Jestem mgr inż. żywienia człowieka, nauk konsumenckich i technologii żywności dietetyk, spec. ds. żywienia  
+Absolwentka Medycznego Studium Zawodowego  wydz. Dietetyki w Krakowie oraz absolwentka SGGW, wydz. Nauk o Żywieniu Człowieka i Konsumpcji, a także Akademii Rolniczej, wydz. Technologii Żywności w Krakowie. <br><br> Ukończyłam również kształcenie podyplomowe  na kierunku Poradnictwo dietetyczne- postępy w żywieniu człowieka w Instytucie Żywności i Żywienia w Warszawie. 
+<b>Członkini Polskiego Stowarzyszenia Dietetyków. </b> </p>   
+<h3>Doświadczenie</h3>
+<p>Od wielu lat jestem uczestnikiem Kongresów, szkoleń i wykładów dot. żywności, terapii żywieniowej i nowoczesnych trendów w żywieniu. Specjalizuję się w zakresie leczenia nadwagi i otyłości, a także chorób wynikających z wadliwego odżywiania dzieci i dorosłych. Jestem również dietetykiem klinicznym. 
+        Swoje doświadczenie zawodowe zdobywałam pracując w Specjalistycznym Szpitalu Dziecięcym i Poradni Endokrynologicznej oraz  Zakładzie Opiekuńczo-Leczniczym w Kielcach. Od kilkunastu lat pracuję również jako nauczyciel dietetyki, pozwala mi to na stały kontakt z tą dziedziną nauki oraz stałe dokształcanie w tym zakresie. Sama prowadząc zdrowy styl życia, jestem dobrym przykładem na to, że bez wyrzeczeń moje samopoczucie i zdrowie, mimo 50+, są w doskonałej formie.</p>
+     <div  style=" display: inline-block;">
+      <img class="dyplomy" src="/images/001_3.jpg"> 
+       <img class="dyplomy"  src="/images/001_2.jpg">
+       <img class="dyplomy" src="/images/001_5.jpg">
+       <img class="dyplomy"  src="/images/001_6.jpg">
+       
+       
+     </div>
+    </div>
+     <div id="contact">
+    <h2>Konsultacje</h2>
+    <img style="width:12%;"class="dietimg" src="/images/contact.png">
+    <p>Jeśli potrzebujesz specjalisty, który pokieruje twoim odrzywianiem i moja oferta spełnia twoje wymagania - zadzwoń lub napisz do mnie. Razem rozwiążemy twój problem!</p>
+    <div class="contact-page">
+    <b>telefon</b>: 604 893 862
+    <br><b>e-mail:</b> malgorzatalukasiak@onet.eu
+    </div>
+    </div>
+  </div>
+    </div>
+</html>

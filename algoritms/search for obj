@@ -1,0 +1,13 @@
+
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  var sarr = Object.keys(source);
+  var carr = Object.keys(collection[0]);
+  // Only change code above this line
+  return collection[0][sarr[0]];
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet"});
+

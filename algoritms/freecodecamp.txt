@@ -1,0 +1,186 @@
+~~Convert HTML Entities
+
+
+function convertHTML(str) {
+  // &colon;&rpar;
+  var pre =["&", "<",">",'"',"'"];
+  var post =["&amp;","&lt;","&gt;","&quot;","&apos;"];
+  for(var i=0; i<pre.length; i++)
+    {
+      var regex = new RegExp(pre[i], "g");
+      str=str.replace(regex, post[i]);
+    }
+  return str;
+}
+
+convertHTML('Stuff in "quotation marks"');
+
+
+~~Spinal
+
+
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David S Hubbins
+ str = str.replace(/_/g, "-");
+  str = str.replace(/\s/g, "-");
+  var post=str[0];
+  for(var i=1; i<str.length; i++ )
+   {
+  if(str[i] == str[i].toUpperCase()&&str[i]!=="-"&&str[i-1]!=="-")
+    {
+      post += "-";
+    }
+     post += str[i];
+    }
+  
+   post=post.toLowerCase();
+ return post;
+}
+
+spinalCase("Teletubbies say Eh-oh");
+
+
+~~fibo
+function sumf(num)
+{
+var arr=[];
+var a=1;
+arr.push(a);
+arr.push(a);
+
+for(var i=2;i<num;i++)
+{
+a=arr[i-2]+a;
+arr.push(a);
+}
+return arr;
+}
+function sumFibs(num)
+{
+  var sum=0;
+  arr=sumf(num);
+  for(var i=0; i<arr.length; i++)
+    {
+      if(arr[i]%2!==0 && arr[i]<=num)
+        {
+          sum+=arr[i];
+        }
+    }
+  return sum;
+}
+sumFibs(10);
+
+
+~~prime
+function prime(num)
+{var p=[];
+ var c;
+   for(var i=2; i<num; i++)
+     { 
+       c=0;
+       for( var j=2; j<num; j++)
+       {if(i%j==0)
+          {
+            c++;
+          }
+       }
+          if(c==1)
+            {
+              p.push(i);
+            }
+     }
+ return p;
+}
+function sumPrimes(num) {
+ var arr = prime(num);
+  var sum = arr.reduce(function(a, b) { return a + b; }, 0);
+  
+  return sum;
+}
+//prime(977);
+sumPrimes(97);
+
+
+~~~SMALEST COMMON
+
+function smallestCommons(arr) {
+  arr.sort(function(a,b){return a-b;});
+  var max = arr[1];
+  var res = max;
+  for(var i=max; i>=arr[0]; i--)
+    {
+      if(res % i !== 0){
+      res += max;
+      i = max;
+      }
+    }
+  return res;
+}
+smallestCommons([13,18]);
+~~~FIND IS KEEPERS
+
+function findElement(arr, func) {
+  var num = 0;
+  for(var i=0; i<arr.length; i++)
+    {
+  if(func(arr[i])==true)
+    {
+      return arr[i];
+    }
+   }return undefined;
+}
+
+findElement([1, 2, 3, 4], function(num){ return num % 2 === 0; });
+~~~~DROP IT
+
+function dropElements(arr, func) {
+  // Drop them elements.
+  for(var i=0; i<arr.length; i++)
+   {
+     if(func(arr[i])==true)
+       {
+         
+         arr=arr.slice(i, arr.length);
+         return arr;
+       }
+}
+  arr=[];
+  return arr;
+}
+
+dropElements([1, 2, 3, 4], function(n) {return n >5;});
+~~~Binary Agents
+
+function binaryAgent(str) {
+  var bin=[];
+  var res="";
+  var arr = str.split(" ");
+  var num =0 ;
+  var lett = [];
+  for(var i=8; i>=0; i--)
+    {
+      bin.push(Math.pow(2,i));
+    }
+  for(i=0; i<arr.length; i++)
+    {
+      num=0;
+      var x = arr[i].split("");
+      for(var j=x.length-1; j>=0; j--)
+        {
+          num += x[j]*bin[j+1];
+        }
+      lett.push(num);
+    }
+  
+  for(i=0; i<lett.length; i++)
+    {
+     res += String.fromCharCode(lett[i]);
+    }
+  return res;
+}
+
+binaryAgent("01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001");
+
+
+

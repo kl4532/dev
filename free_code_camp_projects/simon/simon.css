@@ -1,0 +1,126 @@
+body{
+background: gray;
+}
+
+.quarter-cir {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  z-index: 1;
+	  border: 10px solid black;
+	  border-radius: 100%;
+}
+.cir {
+    position: absolute;
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+}
+
+.cir.green {
+    background: green;
+    clip: rect(0px, 200px, 200px, 0px);
+    width: 400px;
+}
+
+.cir.blue {
+    background: #00A6FF;
+    clip: rect(200px,400px, 400px, 200px);
+    width: 400px;
+}
+
+.cir.red {
+    background: red;
+    clip: rect(0px, 400px, 200px, 200px);
+    width: 400px;
+}
+
+.cir.yellow {
+    background: yellow;
+    clip: rect(200px, 200px, 400px, 0px);
+    width: 400px;
+}
+.inside
+{
+width: 180px;
+height: 180px;
+border-radius:900px;
+background-color: black;
+ z-index: 5;
+position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  border: 10px solid black;
+  text-align: center;
+
+  line-height: 120px;
+	color: white;
+	font-size: 30px;
+}
+.crossv {
+  background: black;
+  height: 400px;
+  position: absolute;
+  width: 10px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 3;
+}
+.crossh {
+  background: black;
+  content: "";
+  height: 10px;
+  width: 400px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+   z-index: 3;
+}
+#count{
+position: absolute;
+ top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+z-index: 6;
+line-height: 0px;
+font-size: 20px;
+}
+.start{
+position: absolute;
+ top: 120px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+z-index: 6;
+line-height: 0px;
+}
+#bstart{
+background: red;
+border-radius:50%;
+height:15px;
+width: 15px;
+border-color: transparent;
+}
+#strict
+{
+  background-color: yellow;
+  border-radius:50%;
+  height:15px;
+  width: 15px;
+  border-color: transparent;
+}
