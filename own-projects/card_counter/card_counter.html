@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="card_counter.css">
+</head>
+
+<body>
+
+  <div class="frame">
+  <div id="card" class="card">
+        <div>
+            <img id="symbol-top" class="symbol-top" src= "./images/default.png" style="width:100px; height:100px;" />
+            <div id="num" class="num">1d</div>
+            <img id="symbol-bottom" class="symbol-bottom" src= "./images/default.png" style="width:100px; height:100px;" />
+        </div>
+
+  </div>
+  <button class = "btn_start" onclick="question()">Hit</button>
+  <div>
+    Choose number of decks:
+    <button class = "btn_decs1" onclick="start(1)">1</button>
+    <button class = "btn_decs2" onclick="start(2)">2</button>
+    <button class = "btn_decs4" onclick="start(4)">4</button>
+    <button class = "btn_decs6" onclick="start(6)">6</button>
+    <button class = "btn_decs8" onclick="start(8)">8</button>
+  </div>
+  <span id="dealed">Dealed: 0</span>
+  <!--<button class = "btn_check" onclick="check_value()">Check value</button> -->
+  </div>
+
+
+<script src="card_counter.js"></script>
+</body>
+
+</html>
