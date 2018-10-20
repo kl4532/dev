@@ -72,7 +72,6 @@
                                                                             // 4. Deep comparison
 //
 function deepEqual(val1, val2){
-
 if(typeof(val1) == "object" && typeof(val2) == "object" && val1!==null && val2!==null){ // go inside if both are objects
   let prop1 = Object.keys(val1);    // create array of object properties
   let prop2 = Object.keys(val2);
@@ -81,20 +80,20 @@ if(typeof(val1) == "object" && typeof(val2) == "object" && val1!==null && val2!=
     {
       if(deepEqual(prop1[i], prop2[i]))     // go inside if both properties are equal -> recursion
       {
-        result = deepEqual(val1[prop1[i]],val2[prop2[i]]);
-        if(result==false){break};   // check equality of values of properties
+        result = deepEqual(val1[prop1[i]],val2[prop2[i]]);  // check equality of values of properties
+        if(result==false){break};       // break loop if val are not equal
       }else result=false;
     }
-    return result;
+    return result;    // final result
 }else if(val1===val2)
 {
   return true;
 }else{ return false;}
 }
 kat1 = {age: 21, name: {first: "Kate", surname: "Kotovich"}, mood: "wriedna_ukrainka", iq:122};
-kat2 = {age: 21, name: {first: "Kate", surname: "Kotovich"}, mood: "liguszka :)", }, iq:122;
+kat2 = {age: 21, name: {first: "Kate", surname: "Kotovich"}, mood: "liguszka :)", iq:122};
 
 a = 12;
-b = 10;
+b = 12;
 console.log("object: " + deepEqual(kat1, kat2));
 console.log("num: " + deepEqual(a,b));
