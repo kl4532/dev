@@ -81,7 +81,8 @@ if(typeof(val1) == "object" && typeof(val2) == "object" && val1!==null && val2!=
     {
       if(deepEqual(prop1[i], prop2[i]))     // go inside if both properties are equal -> recursion
       {
-        result = deepEqual(val1[prop1[i]],val2[prop2[i]]);   // check equality of values of properties
+        result = deepEqual(val1[prop1[i]],val2[prop2[i]]);
+        if(result==false){break};   // check equality of values of properties
       }else result=false;
     }
     return result;
@@ -90,8 +91,8 @@ if(typeof(val1) == "object" && typeof(val2) == "object" && val1!==null && val2!=
   return true;
 }else{ return false;}
 }
-kat1 = {name: "Katia", age: 21, species: "wriedna_ukrainka" };
-kat2 = {name: "Katia", age: 21, species: "liguszka :)" };
+kat1 = {age: 21, name: {first: "Kate", surname: "Kotovich"}, mood: "wriedna_ukrainka", iq:122};
+kat2 = {age: 21, name: {first: "Kate", surname: "Kotovich"}, mood: "liguszka :)", }, iq:122;
 
 a = 12;
 b = 10;
