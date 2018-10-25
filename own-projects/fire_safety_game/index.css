@@ -20,8 +20,18 @@
 }
 .qAndA{
   top: 0;
-  height: 500px;
+  position: absolute;
+  top: 10px;
+  left: 400px;
+}
+.answers{
+  height: 100px;
   width: 300px;
-  border-radius: 2px;
-  border-style: double;
+  background: blue;
+  padding: 3px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.answers:hover{
+  background: yellow;
 }
