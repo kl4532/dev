@@ -109,7 +109,7 @@ if(death+saved+empty==25){
 }
 }
 function wrapInAdiv(value, param){
-  return "<span class='answers' onclick='checkAnswer(" + value + param + ")'>" + value  + "</span>" + "<br>";
+  return "<span class='answers' onclick='checkAnswer(" + value +","+ param + ")'>" + value  + "</span>" + "<br>";
 }
 function checkAnswer(value, param){
 if(current[2]==value){
