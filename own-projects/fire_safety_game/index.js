@@ -21,7 +21,7 @@ for(var i=0; i<25;i++){
   board.push([i,arr_qa[i][0],arr_qa[i][1],arr_qa[i][2],arr_qa[i][3]] ); //pushing index of question and the question and the answer
 }
 // setting dimensions of container and cell
-function buildingConstructor(players){
+function buildingConstructor(players){                  // not used yet
   var container = document.getElementById('container');
   switch (players) {
     case 1:
@@ -66,59 +66,58 @@ qAndA.setAttribute("class", "qAndA");
     function output(stat, qAndA, gameInfo, saved, death, empty){
       stat.innerHTML = gameInfo + "<br>Ocaleni: "+ saved + "<br>Ofiary: "+ death + "<br>Pusty: " + empty;
       frame.appendChild(stat);
-      qAndA.innerHTML = "<br>QUESTIONS and A";
-      stat.appendChild(qAndA);
     }
   output(stat, qAndA, gameInfo, saved, death, empty);
 function clickHandler(){
-      current = board[this.id]
-      // qAndA.innerHTML = "<div>" + str + "</div>" +"<br>"+ "a) " + wrapInAdiv(board[this.id][3][0])
-      // + "<br>" + "b) " + wrapInAdiv(board[this.id][3][1]) + "<br>" +  "c) " + wrapInAdiv(board[this.id][3][2]);
-      var answer = prompt(board[this.id][1]);
-if (answer == board[this.id][2]) {
-  //alert("true");
-  this.style.backgroundColor = "blue";
-  this.removeEventListener("click", clickHandler);
-      if(board[this.id][4]==true){
-        ++saved;
-        output(stat, qAndA, gameInfo, saved, death, empty);
-        this.style.backgroundColor = "green";
-      }else{
-        ++empty;
-        output(stat, qAndA, gameInfo, saved, death, empty);
-      }
-  //   // if false => mark black, add score, deactivate, do not change player
-}else{
-  //alert("false");
-  this.style.backgroundColor = "blue";
-  this.removeEventListener("click", clickHandler);
-  if(board[this.id][4]==true){
-    ++death;
-    output(stat, qAndA, gameInfo, saved, death, empty);
-    this.style.backgroundColor = "black";
-  }else{
-    ++empty;
-    output(stat, qAndA, gameInfo, saved, death, empty);
-  }
-  //   // if false => mark black, deactivate, change player
-}
+      current = board[this.id];
+      qAndA.innerHTML = "<br>" + current[1] +    //asking question - Calculate...
+       "<br>"+ "a) " + wrapInAdiv(current[3][0], this) +   // possible answers  // here the problem appears, cannot pass 'this' to onclick function in HTML, to set it
+      "<br>" + "b) " + wrapInAdiv(current[3][1], this) + // must be done here in clickHandler function which is called in addEventListener function
+      "<br>" +  "c) " + wrapInAdiv(current[3][2], this);
+      stat.appendChild(qAndA);
+// if (answer == current[2]) {
+//   //alert("true");
+//   this.style.backgroundColor = "blue";
+//   this.removeEventListener("click", clickHandler);
+//       if(board[this.id][4]==true){
+//         ++saved;
+//         output(stat, qAndA, gameInfo, saved, death, empty);
+//         this.style.backgroundColor = "green";
+//       }else{
+//         ++empty;
+//         output(stat, qAndA, gameInfo, saved, death, empty);
+//       }
+//   //   // if false => mark black, add score, deactivate, do not change player
+// }else{
+//   //alert("false");
+//   this.style.backgroundColor = "blue";
+//   this.removeEventListener("click", clickHandler);
+//   if(board[this.id][4]==true){
+//     ++death;
+//     output(stat, qAndA, gameInfo, saved, death, empty);
+//     this.style.backgroundColor = "black";
+//   }else{
+//     ++empty;
+//     output(stat, qAndA, gameInfo, saved, death, empty);
+//   }
+//   //   // if false => mark black, deactivate, change player
+// }
 
 if(death+saved+empty==25){
   let total = ((saved/death)*100);
   alert("Ocaliłeś " + total.toFixed(0) + "% mieszkańców \n" + "KONIEC: odświerz stronę by zagrać ponownie");
 }
 }
-// function wrapInAdiv(value){
-//   return "<span class='answers' onclick='checkAnswer("+value+")'>" + value + "</span>" + "<br>";
-// }
-// function checkAnswer(value){
-// if(current[2]==value){
-//   alert("true");
-//   board.style.backgroundColor = "green";
-//
-//   // if true => mark green, deactivate, dont change the player
-// }else{
-//   alert("false");
-//   // if false => mark black, deactivate, change player
-// }
-// }
+function wrapInAdiv(value, param){
+  return "<span class='answers' onclick='checkAnswer(" + value + ")'>" + param + "</span>" + "<br>";
+}
+function checkAnswer(value, param){
+if(current[2]==value){
+  alert("true");
+  this.style.backgroundColor = "green";
+  // if true => mark green, deactivate, dont change the player
+}else{
+  alert("false");
+  // if false => mark black, deactivate, change player
+}
+}
