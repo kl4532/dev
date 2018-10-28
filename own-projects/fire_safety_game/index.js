@@ -114,7 +114,7 @@ function wrapInAdiv(value, param){
 function checkAnswer(value, param){
 if(current[2]==value){
   alert("true");
-  this.style.backgroundColor = "green";
+  param.style.backgroundColor = "green";
   // if true => mark green, deactivate, dont change the player
 }else{
   alert("false");
