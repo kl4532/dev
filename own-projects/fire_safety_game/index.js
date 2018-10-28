@@ -75,6 +75,45 @@ function clickHandler(){
       "<br>" + "b) " + wrapInAdiv(current[3][1], this.id) +
       "<br>" +  "c) " + wrapInAdiv(current[3][2], this.id);
       stat.appendChild(qAndA);
+if(death+saved+empty==25){
+  let total = ((saved/death)*100);
+  alert("Ocaliłeś " + total.toFixed(0) + "% mieszkańców \n" + "KONIEC: odświerz stronę by zagrać ponownie");
+}
+}
+
+function wrapInAdiv(value, id){
+  return "<span class='answers' onclick='checkAnswer(" + value +","+ id + ")'>" + value  + "</span>" + "<br>";
+}
+function checkAnswer(value, id){
+  curr_window = document.getElementById(id);
+if(current[2]==value){
+  alert("true");
+  //this.removeEventListener("click", clickHandler);
+        if(current[4]==true){
+          ++saved;
+          output(stat, qAndA, gameInfo, saved, death, empty);
+          curr_window.style.backgroundColor = "green";
+        }else{
+          ++empty;
+          output(stat, qAndA, gameInfo, saved, death, empty);
+          curr_window.style.backgroundColor = "blue";
+        }
+  // if true => mark green, deactivate, dont change the player
+}else{
+  alert("false");
+    //this.removeEventListener("click", clickHandler);
+    if(current[4]==true){
+      ++death;
+      output(stat, qAndA, gameInfo, saved, death, empty);
+      curr_window.style.backgroundColor = "black";
+    }else{
+      ++empty;
+      output(stat, qAndA, gameInfo, saved, death, empty);
+      curr_window.style.backgroundColor = "blue";
+    }
+//  if false => mark black, deactivate, change player
+}
+}
 // if (answer == current[2]) {
 //   //alert("true");
 //   this.style.backgroundColor = "blue";
@@ -102,22 +141,3 @@ function clickHandler(){
 //   }
 //   //   // if false => mark black, deactivate, change player
 // }
-
-if(death+saved+empty==25){
-  let total = ((saved/death)*100);
-  alert("Ocaliłeś " + total.toFixed(0) + "% mieszkańców \n" + "KONIEC: odświerz stronę by zagrać ponownie");
-}
-}
-function wrapInAdiv(value, id){
-  return "<span class='answers' onclick='checkAnswer(" + value +","+ id + ")'>" + value  + "</span>" + "<br>";
-}
-function checkAnswer(value, id){
-if(current[2]==value){
-  alert("true");
-  document.getElementById(id).style.backgroundColor = "green";
-  // if true => mark green, deactivate, dont change the player
-}else{
-  alert("false");
-  // if false => mark black, deactivate, change player
-}
-}
