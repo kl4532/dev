@@ -71,9 +71,9 @@ qAndA.setAttribute("class", "qAndA");
 function clickHandler(){
       current = board[this.id];
       qAndA.innerHTML = "<br>" + current[1] +    //asking question - Calculate...
-       "<br>"+ "a) " + wrapInAdiv(current[3][0], this) +   // possible answers  // here the problem appears, cannot pass 'this' to onclick function in HTML, to set it
-      "<br>" + "b) " + wrapInAdiv(current[3][1], this) + // must be done here in clickHandler function which is called in addEventListener function
-      "<br>" +  "c) " + wrapInAdiv(current[3][2], this);
+       "<br>"+ "a) " + wrapInAdiv(current[3][0], this.id) +
+      "<br>" + "b) " + wrapInAdiv(current[3][1], this.id) +
+      "<br>" +  "c) " + wrapInAdiv(current[3][2], this.id);
       stat.appendChild(qAndA);
 // if (answer == current[2]) {
 //   //alert("true");
@@ -108,13 +108,13 @@ if(death+saved+empty==25){
   alert("Ocaliłeś " + total.toFixed(0) + "% mieszkańców \n" + "KONIEC: odświerz stronę by zagrać ponownie");
 }
 }
-function wrapInAdiv(value, param){
-  return "<span class='answers' onclick='checkAnswer(" + value +","+ param + ")'>" + value  + "</span>" + "<br>";
+function wrapInAdiv(value, id){
+  return "<span class='answers' onclick='checkAnswer(" + value +","+ id + ")'>" + value  + "</span>" + "<br>";
 }
-function checkAnswer(value, param){
+function checkAnswer(value, id){
 if(current[2]==value){
   alert("true");
-  param.style.backgroundColor = "green";
+  document.getElementById(id).style.backgroundColor = "green";
   // if true => mark green, deactivate, dont change the player
 }else{
   alert("false");
