@@ -5,6 +5,8 @@ var saved=0, death=0, empty =0;
 var board = [];
 var arr_qa = [];
 var current;
+var gameInfo ="Uratuj ludzi z płonącego budynku. Przeszukaj wszystkie pomieszczenia klikając na okna i odpowiadając na pytania. Powodzenia!";
+
 function rand(min, max){
   return Math.floor(Math.random()*(1+max-min))+min;
 }
@@ -18,7 +20,7 @@ for(var i=0; i<25;i++){
   arr_qa.push(["Calculate: " + a + " + " + b, a+b, answers, isPersonInside]);
   board.push([i,arr_qa[i][0],arr_qa[i][1],arr_qa[i][2],arr_qa[i][3]] ); //pushing index of question and the question and the answer
 }
-// function setting dimension of container and cell
+// setting dimensions of container and cell
 function buildingConstructor(players){
   var container = document.getElementById('container');
   switch (players) {
@@ -38,7 +40,6 @@ function buildingConstructor(players){
       break;
     default:
   }
-
 }
     for(var i = 0; i < board.length; i++){
         //create a div HTML element called cell
@@ -56,46 +57,56 @@ function buildingConstructor(players){
     entrence.src = "./img/door.png";
     container.appendChild(entrence);
 
-// create qaa div
-    var qAndA = document.createElement("div");
-    qAndA.setAttribute("class", "qAndA");
-    qAndA.innerHTML = "Live saved: "+ saved;
+var stat = document.createElement("div");        // create status div
+stat.setAttribute("class", "stat");
+stat.setAttribute("id", "stat");
 
-    frame.appendChild(qAndA);
+var qAndA = document.createElement("div");     // create qaa div/
+qAndA.setAttribute("class", "qAndA");
+    function output(stat, qAndA, gameInfo, saved, death, empty){
+      stat.innerHTML = gameInfo + "<br>Ocaleni: "+ saved + "<br>Ofiary: "+ death + "<br>Pusty: " + empty;
+      frame.appendChild(stat);
+      qAndA.innerHTML = "<br>QUESTIONS and A";
+      stat.appendChild(qAndA);
+    }
+  output(stat, qAndA, gameInfo, saved, death, empty);
 function clickHandler(){
       current = board[this.id]
-      var str = board[this.id][1];
       // qAndA.innerHTML = "<div>" + str + "</div>" +"<br>"+ "a) " + wrapInAdiv(board[this.id][3][0])
       // + "<br>" + "b) " + wrapInAdiv(board[this.id][3][1]) + "<br>" +  "c) " + wrapInAdiv(board[this.id][3][2]);
-      var answer = prompt(str);
+      var answer = prompt(board[this.id][1]);
 if (answer == board[this.id][2]) {
-  alert("true");
+  //alert("true");
   this.style.backgroundColor = "blue";
   this.removeEventListener("click", clickHandler);
       if(board[this.id][4]==true){
         ++saved;
-        qAndA.innerHTML = "Live saved: "+ saved + "<br>" + "Death: "+ death + "<br>" + "Empty" + empty;
+        output(stat, qAndA, gameInfo, saved, death, empty);
         this.style.backgroundColor = "green";
       }else{
         ++empty;
-        qAndA.innerHTML = "Live saved: "+ saved + "<br>" + "Death: "+ death + "<br>" + "Empty" + empty;s
+        output(stat, qAndA, gameInfo, saved, death, empty);
       }
   //   // if false => mark black, add score, deactivate, do not change player
 }else{
-  alert("false");
+  //alert("false");
   this.style.backgroundColor = "blue";
   this.removeEventListener("click", clickHandler);
   if(board[this.id][4]==true){
     ++death;
-    qAndA.innerHTML = "Live saved: "+ saved + "<br>" + "Death: "+ death + "<br>" + "Empty" + empty;
+    output(stat, qAndA, gameInfo, saved, death, empty);
     this.style.backgroundColor = "black";
   }else{
     ++empty;
-    qAndA.innerHTML = "Live saved: "+ saved + "<br>" + "Death: "+ death + "<br>" + "Empty" + empty;
+    output(stat, qAndA, gameInfo, saved, death, empty);
   }
   //   // if false => mark black, deactivate, change player
 }
-    console.log("worked");
+
+if(death+saved+empty==25){
+  let total = ((saved/death)*100);
+  alert("Ocaliłeś " + total.toFixed(0) + "% mieszkańców \n" + "KONIEC: odświerz stronę by zagrać ponownie");
+}
 }
 // function wrapInAdiv(value){
 //   return "<span class='answers' onclick='checkAnswer("+value+")'>" + value + "</span>" + "<br>";
