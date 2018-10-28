@@ -1,7 +1,18 @@
+body{
+  background: burlywood;
+}
+#intro{
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 .cell{
   height: 80px;
   width: 50px;
-  background: red;
+  background-image: url("././img/fire2.png");
   display: inline-block;
   margin: 10px;
 }
@@ -22,16 +33,27 @@
   top: 0;
   position: absolute;
   top: 10px;
-  left: 400px;
+  left: 370px;
 }
 .answers{
-  height: 100px;
-  width: 300px;
   background: blue;
-  padding: 3px;
+  padding: 8px;
   border-radius: 50%;
   margin-bottom: 10px;
+  user-select: none;
 }
 .answers:hover{
   background: yellow;
+}
+li{
+  list-style: square;
+  font-size:20px;
+}
+li.dotSaved {color:green;}
+li.dotDeath {color: red;}
+ul{
+  margin-top: 10px;
+}
+img{
+  user-select: none;
 }
