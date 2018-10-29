@@ -12,11 +12,7 @@ body{
 .cell{
   height: 80px;
   width: 50px;
-<<<<<<< HEAD
   background-image: url("img/fire2.png");
-=======
-  background-image: url("././img/fire2.png");
->>>>>>> c2288af29f51834a06e2ad7d6b58a6df7c982c53
   display: inline-block;
   margin: 10px;
 }
