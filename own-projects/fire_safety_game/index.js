@@ -9,7 +9,77 @@ var current;
 var onePlayer =false;
 var firstPlayer =true;
 var gameInfo ="Uratuj ludzi z płonącego budynku. Przeszukaj wszystkie pomieszczenia klikając na okna i odpowiadaj na pytania. Powodzenia!";
-
+var data_array = [["Która z gaśnic jest najlepsza do gaszenia pożarów metali lekkich?","proszkowa", "śniegowa", "pianowa", "proszkowa"],
+["Dwutlenek węgla jest gazem:", "lżejszym od powietrza" ,"cięższym od powietrza", "o takim samym ciężarze jak powietrze", "cięższym od powietrza"],
+["Lekka woda to:", "środek pianotwórczy niezbędny do wytwarzania piany lekkiej",
+"nowoczesny wypełniacz poduszek amortyzujących upadek ludzi podczas ich ewakuacji z wyższych kondygnacji budynku","środek gaśniczy bardzo skuteczny przy gaszeniu pożarów grupy B",
+ "środek gaśniczy bardzo skuteczny przy gaszeniu pożarów grupy B"],
+ ["Inhibitor to związek chemiczny używany w środkach gaśniczych który powoduje:", "spowolnienie procesu spalania",
+ "obniża stężenie tlenu w strefie spalania", "przyśpiesza proces utleniania", "spowolnienie procesu spalania"],
+ ["Minimalną pojemność gaśnicy reguluje:", "Zarządzenie KG PSP", "Wytyczne CNBOP", "Polska Norma", "Polska Norma"],
+ ["Elektryczność statyczna powstaje w wyniku:", "przeciążenia instalacji elektrycznej", "przepływu podczas wyładowania atmosferycznego",
+ "gromadzenia się ładunków elektrycznych podczas tarcia materiałów dielektrycznych" ,"gromadzenia się ładunków elektrycznych podczas tarcia materiałów dielektrycznych"],
+ ["Klapa dymowa jest to urządzenie służące do:", "usuwania dymu i gazów pożarowych z obiektów budowlanych", "zamykania przewodów wentylacyjnych i ich zabezpieczania",
+ "zatrzymania dymów w przewodach kominowych", "usuwania dymu i gazów pożarowych z obiektów budowlanych"],
+ ["Do wytwarzania i podawania piany średniej służy:", "prądownica pianowa",  "wytwornica pianowa", "agregat pianotwórczy", "wytwornica pianowa"],
+ ["Sprzęt i urządzenia pożarnicze mogą być użytkowane pod warunkiem uzyskania świadectwa dopuszczenia do stosowania w ochronie przeciwpożarowej, wydanego przez:",
+ "CNBOP", "KG PSP", "SGSP", "CNBOP"],
+ ["Proces endotermiczny to proces:", "wydzielania ciepła", "pochłaniania ciepła","inhibicji", "pochłaniania ciepła"],
+ ["Odporność ogniowa jest to cecha elementu budowlanego mierzona:", "w stopniach Celsjusza", "w kg/m3", "w godzinach"," w godzinach"],
+ ["Dominującym działaniem gaśniczym proszków gaśniczych jest:", "chłodzenie", "obniżenie stężenia tlenu", "efekt antykatalityczny", "efekt antykatalityczny"],
+ ["Litera X w górnym rzędzie znaków na tablicy ostrzegawczej stosowanej w kolejowym i drogowym transporcie materiałów niebezpiecznych, oznacza:",
+ "UWAGA! Promieniowanie X", "środek znajduje się pod stałym ciśnieniem","absolutny zakaz kontaktu danego materiału  z wodą", "absolutny zakaz kontaktu danego materiału  z wodą"],
+ ["Najwięcej osób ginie w czasie pożarów z powodu :", "zaczadzenia", "poparzenia", "innych przyczyn", "zaczadzenia"],
+ ["Czego nie wolno gasić wodą:", "drewna", "węgla", "sodu", "sodu"],
+ ["Benzynę należy gasić:", "pianą"," wodą", "dwutlenkiem węgla", "pianą"],
+ ["Ile pełnych butli z gazem propan-butan o pojemności do 11 kg można przechowywać w piwnicy:", "1 butlę", "nie można wcale", "do 2 butli", "nie można wcale"],
+ ["Jaki prąd gaśniczy wody powinien być zastosowany przy gaszeniu pożarów materiałów rozdrobnionych:", "prąd zwarty",
+ "jednocześnie prąd zwarty i kroplisty", "prąd rozproszony", "prąd rozproszony"],
+ ["Środki zwilżające są to środki, które:", "zwiększają napięcie powierzchniowe wody", "obniżają napięcie powierzchniowe wody",
+ "zmniejszają opory tłoczenia wody", "obniżają napięcie powierzchniowe wody"],
+ ["Które z wymienionych substancji można gasić przy użyciu wody:", "słoma" , "sód", "potas", "słoma"],
+ ["Co to jest strefa pożarowa:", "teren działania straży pożarnej", "przestrzeń objęta pożarem", "wydzielona pożarowo przestrzeń", "wydzielona pożarowo przestrzeń"],
+ ["Jaki gaz o właściwościach wybuchowych powstaje podczas ładowania akumulatora:", "chlor", "wodór ", "chlorowodór", "wodór "],
+ ["Na tablicy informacyjnej (pomarańczowy prostokąt) samochodu przewożącego materiały niebezpieczne w transporcie kolejowym i drogowym zakodowane są w postaci cyfr informacje dotyczące:",
+ "odporności ogniowej zbiornika pojazdu", "właściwości przewożonego materiału", "właściwości oraz numer identyfikacyjny przewożonej substancji",
+  "właściwości oraz numer identyfikacyjny przewożonej substancji"],
+ ["W jakiej najmniejszej odległości od budynku może przebiegać droga pożarowa :", "5 m", "10 m", "25m", "5 m"],
+ ["Gaz ziemny jest :", "lżejszy od powietrza", "cięższy od powietrza", "ciężar właściwy gazu ziemnego jest równy ciężarowi  właściwemu powietrza", "lżejszy od powietrza"],
+ ["Płonącą odzież na człowieku należy gasić:", "Kocem gaśniczym", "Gaśnicą pianową", "Gaśnicą proszkową", "Kocem gaśniczym" ],
+ ["Jeśli poczujesz w pomieszczeniu zapach gazu nie należy:", "oddalać się z zagrożonego pomieszczenia",
+ "powiadamiać pogotowia gazowego", "zapalić świeczki i sprawdzić skąd ulatnia się gaz", "zapalić świeczki i sprawdzić skąd ulatnia się gaz"],
+ ["Najprostszym sposobem na ugaszenie płonącego oleju na patelni:", "użycie gaśnicy proszkowej",  "użycie koca gaśniczego",  "użycie pokrywki", "użycie pokrywki" ],
+ ["Czy strażak ratownik może stwierdzić zgon osoby ratowanej?", "tak", "nie",
+ "tak ale tylko w przypadkach np. spopielenia, długotrwałego przebywania pod wodą, dekapitacji, masywnego okaleczenia", "nie"],
+ ["Przy oparzeniu wrzącą wodą należy zastosować:", "suchy opatrunek na miejsce oparzenia",
+ "schładzanie zimną wodą miejsca oparzenia", "wodę utlenioną", "schładzanie zimną wodą miejsca oparzenia"],
+ ["Zaniedbanie czyszczenia kanałów kominowych (spalinowych) może być przyczyną śmierci poprzez:",
+  "zatrucie tlenkiem węgla", "nastąpienie wybuchu", "wybuch pożaru", "zatrucie tlenkiem węgla"],
+  ["Ciśnienie 1 bara jest równe:", "10 Mpa", "0,1 Mpa", "1 Mpa", "0,1 Mpa"],
+  ["W przypadku oparzenia najlepiej jest: ", "zdezynfekować ranę alkoholem", "długo polewać ranę chłodną wodą", "zastosować opatrunek uciskowy", "długo polewać ranę chłodną wodą"],
+  ["Tryskacze służą do:", "szybkiego uruchomienia samochodu gaśniczego",  "gaszenia pożaru", "wykrywania pożaru", "gaszenia pożaru"],
+  ["Do czego służy bezpiecznik elektryczny?", "do wyłączenia dopływu prądu wskutek przeciążenia instalacji elektrycznej",
+  "do chronienia instalacji przed burzą", "do zabezpieczenia przed porażeniem prądem", "do wyłączenia dopływu prądu wskutek przeciążenia instalacji elektrycznej" ],
+  ["Międzynarodowa umowa ADR dotyczy przewozu materiałów niebezpiecznych w transporcie:", "Drogowym", "Kolejowym", "Morskim", "Drogowym"],
+  ["Złota godzina", "to czas, w którym strażak uratuje  poszkodowanego", "to czas dojazdu pogotowia ratunkowego",
+   "to czas od chwili wypadku do udzielenia pomocy w szpitalu", "to czas od chwili wypadku do udzielenia pomocy w szpitalu"],
+  ["Podział cieczy łatwo zapalnych na klasy niebezpieczeństwa pożarowego zależy od:", "ciepła spalania", "temperatury zapłonu" , "granic wybuchowości", "temperatury zapłonu"],
+  ["Wybuch może spowodować:", "metan z powietrzem", "dwutlenek węgla z powietrzem", "wodór z azotem", "metan z powietrzem"],
+  ["Czad to :", "tlenek węgla" , "dwutlenek węgla" , "tlenek węgla ze związkami siarki", "tlenek węgla"],
+  ["Dolna granica wybuchowości jest cechą charakteryzującą:", "ciecze palne",  "gazy palne", "ciała stałe palne", "gazy palne"],
+  ["Pirometrem nazywamy:",  "urządzenie służące do wykrywania substancji toksycznych", "urządzenie sejsmiczno-akustyczne do wykrywania zasypanych ludzi",
+  "urządzenie do zdalnego, bezstykowego pomiaru temperatury", "urządzenie do zdalnego, bezstykowego pomiaru temperatury"],
+  ["Czy wolno napełniać gazem butle o masie 11kg na stacjach gazu płynnego?", "nie", "tak, jeżeli wykonana jest niezależna instalacja, nie przeznaczona do tankowania pojazdów", "tak", "nie"],
+  ["Czy strażacy biorący udział w akcji ratowniczej mają prawo do korzystania dróg prywatnych:", "Tak, za zgodą ich właściciela",
+  "Tak i to bez zgody ich właściciela , ale tylko  w zakresie niezbędnym do prowadzenia akcji", "Nie",
+  "Tak i to bez zgody ich właściciela , ale tylko  w zakresie niezbędnym do prowadzenia akcji"],
+  ["Czy konieczne jest zapewnienie drogi pożarowej co najmniej z dwóch stron budynku ?", "tak", "nie",
+  "tak, jeżeli szerokość budynku jest większa niż 60 m", "tak, jeżeli szerokość budynku jest większa niż 60 m"],
+  ["Budynki określone jako IN to:", "budynki inwentarskie", "budynki produkcyjno-magazynowe", "budynki mieszkalne", "budynki inwentarskie" ],
+  ["Budynek średniowysoki (SW) to:", "powyżej 18 kondygnacji lub 55 m", "od 4 do 9 kondygnacji lub od 25 m do 55 m",
+  "powyżej 4 kondygnacji do 9 kondygnacji włącznie lub od 12m do 25m włącznie", "powyżej 4 kondygnacji do 9 kondygnacji włącznie lub od 12m do 25m włącznie"],
+  ["Jaki jest minimalny czas działania oświetlenia ewakuacyjnego?", "2 godziny", "3 godziny", "4 godziny", "2 godziny"]];
+var shuffled_data_array = [];
 function rand(min, max){  // random num generator
   return Math.floor(Math.random()*(1+max-min))+min;
 }
@@ -50,6 +120,18 @@ function buildingConstructor(players){                  // setting building dime
     default:
   }
 }
+function shuffle(arr1, arr2){   // shuffling arr1 to create arr2, arr1 is still available after function proceeded
+  let temp = arr1.slice(0); // clone arr1 to save it, temp will be killed
+    while(arr2.length<48)
+      {
+        let pick = rand(0, temp.length-1);
+        arr2.push(temp[pick]);
+        if(temp.length !== 0)
+        {
+            temp.splice(pick, 1);
+        }
+      }
+}
 //init();
 function init(players){        // initialization of the game
   var intro = document.getElementById('intro');
@@ -59,13 +141,17 @@ function init(players){        // initialization of the game
   block.setAttribute("id", "container");
   frame.appendChild(block);
   buildingConstructor(players);
+  shuffle(data_array, shuffled_data_array); // shuffling questions to place them randomly
   for(var i=0; i<windowsNumber;i++){
     var isPersonInside = false
-    var a = rand(0, 60), b = rand(0, 60), factor = rand(0,5);
+    factor = rand(0,5); // ratio of person rand(0,5)= 1/5 room is empty
+    // 48 questions data_array[0-47], data_array[i][1-3] - possible answers, data_array[i][4] correct answer
     if(factor>0){
       isPersonInside = true;}else isPersonInside = false;
-    var answers = [a+b-1, b+a+1, a+b];
-    arr_qa.push(["Calculate: " + a + " + " + b, a+b, answers, isPersonInside]);
+    var answers = [shuffled_data_array[i][1], shuffled_data_array[i][2], shuffled_data_array[i][3]];
+    arr_qa.push([shuffled_data_array[i][0], shuffled_data_array[i][4], answers, isPersonInside]);
+    // var answers = [data_array[i][1], data_array[i][2], data_array[i][3]];          // for test questions at the same positions
+    // arr_qa.push([data_array[i][0], data_array[i][4], answers, isPersonInside]);
     board.push([i,arr_qa[i][0],arr_qa[i][1],arr_qa[i][2],arr_qa[i][3]] ); //pushing index of question and the question and the answer
   }
   for(var i = 0; i < board.length; i++){
@@ -114,7 +200,7 @@ function clickHandler(){
 }
 
 function wrapInAdiv(value, id){
-  return "<span class='answers' onclick='checkAnswer(" + value +","+ id + ")'>" + value  + "</span>" + "<br>";
+  return '<span class="answers" onclick="checkAnswer(\''+ value + '\','+ id +')">'+ value + '</span>' + "<br>"; // KURWA!
 }
 function checkAnswer(value, id){
   curr_window = document.getElementById(id);
@@ -182,3 +268,5 @@ if(death+saved+empty==windowsNumber){
 }
 }
 }
+
+  //alert(data_array[47][4]);
