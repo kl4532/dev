@@ -206,7 +206,6 @@ function wrapInAdiv(value, id){
 function checkAnswer(value, id){
   curr_window = document.getElementById(id);
   if(current[2]==value){    // check if answer true
-    //alert("true");
     curr_window.removeEventListener("click", clickHandler);
       if(current[4]==true){     //check if person inside
           ++saved;
@@ -223,7 +222,6 @@ function checkAnswer(value, id){
       }
   // if true => mark green, deactivate, dont change the player
 }else{
-  //alert("false");
     curr_window.removeEventListener("click", clickHandler);
     if(current[4]==true){
       ++death;
@@ -238,7 +236,7 @@ function checkAnswer(value, id){
       curr_window.style.backgroundColor = "black";
       curr_window.style.backgroundImage = "none";
     }
-//  if false => mark black, deactivate, change player
+//  if false => mark black, deactivate, dont change the player
 }
 if(current[2]!==value){
 correctAnswer.innerHTML = "Źle, prawidłowa odpowiedź brzmi: " + current[2];
@@ -271,7 +269,7 @@ if(death+saved+empty==windowsNumber){
     stat.appendChild(qAndA);
   }
 }
-var restart = document.createElement("INPUT");
+var restart = document.createElement("INPUT");    // add game restart button after finishing game
 restart.setAttribute("type", "button");
 restart.setAttribute("class", "restart");
 restart.setAttribute("id", "restart");
@@ -280,5 +278,3 @@ restart.setAttribute("onclick", "window.location.reload();");
 stat.appendChild(restart);
 }
 }
-
-  //alert(data_array[47][4]);
