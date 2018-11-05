@@ -1,17 +1,17 @@
 
-var frame = document.querySelector("#frame");   // frame for all divs
-var qAndA = document.createElement("div");     // create qaa div need to be global
+let frame = document.querySelector("#frame");   // frame for all divs
+let qAndA = document.createElement("div");     // create qaa div need to be global
 qAndA.setAttribute("class", "qAndA");
-var correctAnswer = document.createElement("div");     // ditto
+let correctAnswer = document.createElement("div");     // ditto
 correctAnswer.setAttribute("class", "correctAnswer");
-var saved=0, death=0, empty =0, saved1=0, death1=0, empty1=0, saved2=0, death2=0, empty2=0;
-var windowsNumber=0;
-var board = [], arr_qa = [];
-var current;
-var onePlayer =true;  // one player as default
-var firstPlayer =true;  // firstPlayer starts a game
-var gameInfo = "Uratuj ludzi z płonącego budynku. Przeszukaj wszystkie pomieszczenia klikając na okna i odpowiadaj na pytania. Powodzenia!";
-var data_array = [["Która z gaśnic jest najlepsza do gaszenia pożarów metali lekkich?","proszkowa", "śniegowa", "pianowa", "proszkowa"],
+let saved=0, death=0, empty =0, saved1=0, death1=0, empty1=0, saved2=0, death2=0, empty2=0;
+let windowsNumber=0;
+let board = [], arr_qa = [];
+let current;
+let onePlayer = true;  // one player as default
+let firstPlayer = true;  // firstPlayer starts a game
+const GAMEINFO = "Uratuj ludzi z płonącego budynku. Przeszukaj wszystkie pomieszczenia klikając na okna i odpowiadaj na pytania. Powodzenia!";
+let data_array = [["Która z gaśnic jest najlepsza do gaszenia pożarów metali lekkich?","proszkowa", "śniegowa", "pianowa", "proszkowa"],
 ["Dwutlenek węgla jest gazem:", "lżejszym od powietrza" ,"cięższym od powietrza", "o takim samym ciężarze jak powietrze", "cięższym od powietrza"],
 ["Lekka woda to:", "środek pianotwórczy niezbędny do wytwarzania piany lekkiej",
 "nowoczesny wypełniacz poduszek amortyzujących upadek ludzi podczas ich ewakuacji z wyższych kondygnacji budynku","środek gaśniczy bardzo skuteczny przy gaszeniu pożarów grupy B",
@@ -81,13 +81,13 @@ var data_array = [["Która z gaśnic jest najlepsza do gaszenia pożarów metali
   ["Budynek średniowysoki (SW) to:", "powyżej 18 kondygnacji lub 55 m", "od 4 do 9 kondygnacji lub od 25 m do 55 m",
   "powyżej 4 kondygnacji do 9 kondygnacji włącznie lub od 12m do 25m włącznie", "powyżej 4 kondygnacji do 9 kondygnacji włącznie lub od 12m do 25m włącznie"],
   ["Jaki jest minimalny czas działania oświetlenia ewakuacyjnego?", "2 godziny", "3 godziny", "4 godziny", "2 godziny"]]; // questions
-var shuffled_data_array = []; // new array for questions prepared for shuffling
+let shuffled_data_array = []; // new array for questions prepared for shuffling
 function rand(min, max){  // random number generator
   return Math.floor(Math.random()*(1+max-min))+min;
 }
-function output(stat, qAndA, gameInfo, saved, death, empty, players_stat){  // output of actual game status
+function output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat){  // output of actual game status
   if(!onePlayer){     // stat for two players
-    stat.innerHTML = gameInfo;
+    stat.innerHTML = GAMEINFO;
     frame.appendChild(stat);
     players_stat.innerHTML = "<div id='player1'>Gracz 1</div>"+
     `<ul><li class='dotSaved'>Ocaleni: ${saved1}</li><li class='dotDeath'>Ofiary: ${death1}</li><li class='dotEmpty'>Pusty: ${empty1}</li></ul>`+
@@ -98,14 +98,14 @@ function output(stat, qAndA, gameInfo, saved, death, empty, players_stat){  // o
       document.getElementById('player1').style.backgroundColor = "yellow";
     }else document.getElementById('player2').style.backgroundColor = "yellow";
   }else{    // stat for one player
-    stat.innerHTML = gameInfo + `<ul><li class='dotSaved'>Ocaleni: ${saved}</li><li class='dotDeath'>Ofiary: ${death}</li><li class='dotEmpty'>Pusty: ${empty}</li></ul>`;
+    stat.innerHTML = GAMEINFO + `<ul><li class='dotSaved'>Ocaleni: ${saved}</li><li class='dotDeath'>Ofiary: ${death}</li><li class='dotEmpty'>Pusty: ${empty}</li></ul>`;
     frame.appendChild(stat);
     stat.style.left ="300px";  // if one player -> move div to the left(bcs div with quesions is thinner)
     stat.appendChild(players_stat);
   }
 }
 function buildingConstructor(players){                  // setting dimensions of container for different amount of players
-  var container = document.getElementById('container');
+  let container = document.getElementById('container');
   switch (players){
     case 1:
       container.style.width = "280px";    // 4x4 //280x500px;
@@ -134,26 +134,26 @@ function shuffle(arr1, arr2){   // shuffling arr1 to create arr2, arr1 is still 
       }
 }
 function init(players){        // initialization of the game
-  var intro = document.getElementById('intro');
+  let intro = document.getElementById('intro');
   intro.remove();                                 //removing intro buttons and text
-  var block = document.createElement("div");      // creating block container for windows with questions
+  let block = document.createElement("div");      // creating block container for windows with questions
   block.setAttribute("class", "container");
   block.setAttribute("id", "container");
   frame.appendChild(block);
   buildingConstructor(players);   // checking how many players in game
   shuffle(data_array, shuffled_data_array); // shuffling questions to place them randomly
-  for(var i=0; i<windowsNumber; i++){
-    var isPersonInside = false;
+  for(let i=0; i<windowsNumber; i++){
+    let isPersonInside = false;
     // 48 questions data_array[0-47], data_array[i][1-3] - possible answers, data_array[i][4] - correct answer
     if(rand(0,5)>0){   // ratio of person rand(0,5)= 1/6(16.667%) of rooms are empty
       isPersonInside = true;}else isPersonInside = false;
-    var answers = [shuffled_data_array[i][1], shuffled_data_array[i][2], shuffled_data_array[i][3]];
+    let answers = [shuffled_data_array[i][1], shuffled_data_array[i][2], shuffled_data_array[i][3]];
     arr_qa.push([shuffled_data_array[i][0], shuffled_data_array[i][4], answers, isPersonInside]);
     board.push([i,arr_qa[i][0],arr_qa[i][1],arr_qa[i][2],arr_qa[i][3]] ); //pushing index of question and the question and the answer
   }
-  for(var i = 0; i < board.length; i++){
+  for(let i = 0; i < board.length; i++){
     //create a div HTML element called cell
-    var cell = document.createElement("div");
+    let cell = document.createElement("div");
     //set its CSS class to cell
     cell.setAttribute("class", "cell");
     cell.setAttribute("id", i);
@@ -162,20 +162,20 @@ function init(players){        // initialization of the game
           //handle click
     cell.addEventListener("click", clickHandler);
     }
-  var entrence = document.createElement("img");
+  let entrence = document.createElement("img");
   entrence.setAttribute("class", "entrence");
   entrence.src = "./img/door.png";
   block.appendChild(entrence);
 
-  var stat = document.createElement("div");        // create status div
+  let stat = document.createElement("div");        // create status div
   stat.setAttribute("class", "stat");
   stat.setAttribute("id", "stat");
-  //output(stat, qAndA, gameInfo, saved, death, empty);
+  //output(stat, qAndA, GAMEINFO, saved, death, empty);
 
-  var players_stat = document.createElement("div");        // create status div
+  let players_stat = document.createElement("div");        // create status div
   players_stat.setAttribute("class", "players_stat");
   players_stat.setAttribute("id", "players_stat");
-  output(stat, qAndA, gameInfo, saved, death, empty, players_stat);
+  output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat);
                                                    // highlite active player
   document.getElementById('player1').style.backgroundColor = "yellow";
 }
@@ -210,13 +210,13 @@ function checkAnswer(value, id){
       if(current[4]==true){     //check if person inside
           ++saved;
           firstPlayer ?  ++saved2 : ++saved1;
-          output(stat, qAndA, gameInfo, saved, death, empty, players_stat);
+          output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat);
           curr_window.style.backgroundColor = "green";
           curr_window.style.backgroundImage = "none";
       }else{
           ++empty;
           firstPlayer ?  ++empty2 : ++empty1;
-          output(stat, qAndA, gameInfo, saved, death, empty, players_stat);
+          output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat);
           curr_window.style.backgroundColor = "black";
           curr_window.style.backgroundImage = "none";
       }
@@ -226,13 +226,13 @@ function checkAnswer(value, id){
     if(current[4]==true){
       ++death;
       firstPlayer ?  ++death2 : ++death1;
-      output(stat, qAndA, gameInfo, saved, death, empty, players_stat);
+      output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat);
       curr_window.style.backgroundColor = "red";
       curr_window.style.backgroundImage = "none";
     }else{
       ++empty;
       firstPlayer ?  ++empty2 : ++empty1;
-      output(stat, qAndA, gameInfo, saved, death, empty, players_stat);
+      output(stat, qAndA, GAMEINFO, saved, death, empty, players_stat);
       curr_window.style.backgroundColor = "black";
       curr_window.style.backgroundImage = "none";
     }
@@ -269,7 +269,7 @@ if(death+saved+empty==windowsNumber){
     stat.appendChild(qAndA);
   }
 }
-var restart = document.createElement("INPUT");    // add game restart button after finishing game
+let restart = document.createElement("INPUT");    // add game restart button after finishing game
 restart.setAttribute("type", "button");
 restart.setAttribute("class", "restart");
 restart.setAttribute("id", "restart");
