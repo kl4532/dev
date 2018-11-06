@@ -1,0 +1,85 @@
+body{
+background: green;
+-webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+.frame{
+  min-width: 1000px;
+  width: 1000px;
+  margin: auto;
+}
+.playerCards{
+}
+.card{
+  position: relative;
+  background: white;
+  color: black;
+  width: 100px;
+  min-width: 100px;
+  height: 150px;
+  border-radius: 10%;
+  border: double 10px;
+  display: inline-block;
+}
+.symbol-top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+}
+.symbol-num{
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.symbol-bottom{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+}
+.btn_start{
+  padding:10px;
+  border-radius: 20px;
+  border: solid white 3px;
+  background: gray;
+  width: 319.99px;
+  text-align: center;
+}
+.btn_start:hover{
+  background: rgba(255, 255, 0, 0.9);
+}
+.btn_decs1{
+  border-radius: 100%;
+  background: #ffcccc;
+}
+.btn_decs1{
+  border-radius: 100%;
+  background: #ffcccc;
+}
+.btn_decs2{
+  border-radius: 100%;
+  background: #ff9999;
+}
+.btn_decs4{
+  border-radius: 100%;
+  background: #ff6666;
+}
+.btn_decs6{
+  border-radius: 100%;
+  background: #ff3333;
+}
+.btn_decs8{
+  border-radius: 100%;
+  background: #ff0000;
+}
+.btn_check{
+  display: inline;
+}

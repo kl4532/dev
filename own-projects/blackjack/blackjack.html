@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="blackjack.css">
+</head>
+
+<body>
+
+	<div class="frame">
+		<div class="playground">
+			<div class="dealerCards">
+
+			</div>
+			<div id="playerCards" class="playerCards">
+			</div>
+		</div>
+		<div class="options">
+			Choose number of decks:
+	    <button class = "btn_decs1" onclick="start(1)">1</button>
+	    <button class = "btn_decs2" onclick="start(2)">2</button>
+	    <button class = "btn_decs4" onclick="start(4)">4</button>
+	    <button class = "btn_decs6" onclick="start(6)">6</button>
+	    <button class = "btn_decs8" onclick="start(8)">8</button>
+		</div>
+  <button class = "btn_start" onclick="hit()">Hit</button>
+  <div>
+
+  </div>
+	<span id="hints">Show hints</span>
+  <span id="dealed">Dealed: 0</span>
+  <button class = "btn_check" onclick="check_value()">Check value</button>
+
+
+  </div>
+
+
+<script src="blackjack.js"></script>
+</body>
+
+</html>
