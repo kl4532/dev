@@ -81,7 +81,9 @@ function initial(){ //  initial conditions - create one unshuffled deck
   ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
   ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
   ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
+  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces for testing
   shuffled = [];
   card_num = 0;
   value = 0;
