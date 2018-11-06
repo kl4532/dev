@@ -3,16 +3,16 @@
 <head>
 <link rel="stylesheet" type="text/css" href="blackjack.css">
 </head>
-
 <body>
-
 	<div class="frame">
 		<div class="playground">
-			<div class="dealerCards">
-
+			<div id="dealerValue">Dealer: 0</div>
+			<div id="dealerCards" class="dealerCards">
 			</div>
+			<div id="playerValue">Player: 0</div>
 			<div id="playerCards" class="playerCards">
 			</div>
+
 		</div>
 		<div class="options">
 			Choose number of decks:
@@ -22,7 +22,12 @@
 	    <button class = "btn_decs6" onclick="start(6)">6</button>
 	    <button class = "btn_decs8" onclick="start(8)">8</button>
 		</div>
-  <button class = "btn_start" onclick="hit()">Hit</button>
+	<div>Your money balance: </div>
+	<button id="btn_bet" class = "btn_bet" onclick="initialDeal()">Bet</button>
+	<input type="number" class = "bet" min="1" max="10000"></input><br>
+  <button id="btn_hit" class = "btn_hit" onclick="hit()">Hit</button>
+	<button id="btn_stand" class = "btn_stand" onclick="stand()">Stand</button>
+	<button id="btn_double" class = "btn_double" onclick="double()">Double</button>
   <div>
 
   </div>

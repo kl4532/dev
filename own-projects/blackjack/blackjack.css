@@ -12,15 +12,25 @@ background: green;
   width: 1000px;
   margin: auto;
 }
+.dealerCards{
+  width: 820px;
+  min-width: 820px;
+  height: 200px;
+  background: brown;
+}
 .playerCards{
+  width: 820px;
+  min-width: 820px;
+  height: 200px;
+  background: blue;
 }
 .card{
   position: relative;
   background: white;
   color: black;
-  width: 100px;
-  min-width: 100px;
-  height: 150px;
+  width: 70px;
+  min-width: 70px;
+  height: 100px;
   border-radius: 10%;
   border: double 10px;
   display: inline-block;
@@ -29,31 +39,32 @@ background: green;
   position: absolute;
   top: 0;
   left: 0;
-  width: 20px;
+  width: 25px;
 }
 .symbol-num{
   position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 30px;
+
 }
 .symbol-bottom{
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 20px;
+  width: 25px;
 }
-.btn_start{
+.btn_hit{
   padding:10px;
   border-radius: 20px;
   border: solid white 3px;
   background: gray;
-  width: 319.99px;
   text-align: center;
 }
-.btn_start:hover{
+.btn_hit:hover{
   background: rgba(255, 255, 0, 0.9);
 }
 .btn_decs1{
