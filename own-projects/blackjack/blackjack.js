@@ -1,14 +1,12 @@
-let deck, shuffled, card_num, value, num_of_decks, end_hand;
-let dealerValue = 0, playerValue = 0, aces = 0, stop =false, notempty = false, acesSubstracted=false;
+let deck, shuffled, card_num, value, num_of_decks, end_hand, ace_hard = 0, ace_soft = 0;
+let dealerValue = 0, playerValue = 0, aces = false, stop =false, notempty = false, acesSubstracted=false;
 initial();
 shuffle(deck, shuffled);
 function hit(){
     addCard('playerCards');
 }
-// Just treat each ace as 11.
-// Then while the value is over 21,
-// subtract 10 from your total for each ace in your hand.
 
+//count every ace as 1, then, if you found an ace, and the total < 12, add 10.
 function addCard(place_id){ // deal card to player or dealer
   notempty = true;
   if(place_id=="hidden"){ // request for hidden card(only once for dealer)
@@ -25,23 +23,27 @@ function addCard(place_id){ // deal card to player or dealer
     dealerValue += cardNumericalValue(shuffled[card_num][0]);
     document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue;
   }else{
-    console.log(shuffled[card_num][0]);
-    shuffled[card_num][0]=="A" ?  ++aces : aces=aces;   // add aces to counter if one appears
     playerValue += cardNumericalValue(shuffled[card_num][0]);
-    if(playerValue>21 && !acesSubstracted){
-      playerValue=valueWithAces(playerValue);
-    acesSubstracted=true;} // fix it!
-    if(playerValue>21)
+    //playerValue<12 && shuffled[card_num][0]=="A"
+    shuffled[card_num][0]=="A" ? aces=true : aces=aces;
+    if(aces){
+      ace_hard = playerValue+10;
+      //alert(playerValue + " "+ aces +" "+ ace_hard);
+    }else ace_hard = playerValue;
+
+    if(ace_hard >21 && playerValue>21)
     {
       document.getElementById('playerValue').innerHTML = "Player: " + playerValue;
       end_hand = true;
       deactivateBtn('btn_hit', true);
-    }else if(playerValue==21){
+    }else if(playerValue==21 || ace_hard==21){
       document.getElementById('playerValue').innerHTML = "Player: 21!";
       end_hand = true;
       deactivateBtn('btn_hit', true);
     }else
-    {document.getElementById('playerValue').innerHTML = "Player: " + playerValue;}
+    {
+      let result = ace_hard < 21 ? ace_hard : playerValue;
+      document.getElementById('playerValue').innerHTML = "Player: " + result}
     }
     card_num++;// pointing to the next card in deck
     place.appendChild(card);
@@ -52,8 +54,8 @@ function initialDeal(){
     deactivateBtn('btn_hit', false);
     playerValue = 0;
   dealerValue = 0;
-  aces = 0;
-  acesSubstracted=false;
+  aces = false;
+  ace_hard =0;
   let player = document.getElementById("playerCards");
   while (player.firstChild) {
   player.removeChild(player.firstChild);
@@ -69,7 +71,21 @@ function initialDeal(){
   setTimeout("addCard('hidden');", 1500);
 }
 function initial(){ //  initial conditions - create one unshuffled deck
-  deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+//   deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+//   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
+//   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
+//   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
+//   ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
+//   ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
+//   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
+//   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+// ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces for testing
+deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
@@ -81,9 +97,7 @@ function initial(){ //  initial conditions - create one unshuffled deck
   ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
   ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
   ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces for testing
+  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
   shuffled = [];
   card_num = 0;
   value = 0;
@@ -162,11 +176,8 @@ function cardNumericalValue(card){
   if(card=="J"||card=="Q"||card=="K"){
     return 10;
   }else if(card=="A"){
-    return 11;
+    return 1;
   }else{return parseInt(card);}
-}
-function valueWithAces(curr_value){
-    return curr_value-(aces*10);
 }
 function deactivateBtn(btn, on){
   document.getElementById(btn).disabled = on;
