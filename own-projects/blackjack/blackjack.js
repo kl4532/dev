@@ -1,6 +1,7 @@
-let deck, shuffled, card_num, value, num_of_decks, end_hand, ace_hard_p = 0, ace_hard_d=0, playerValueInitial, ace_soft = 0;
+let deck, shuffled, card_num, value=0, num_of_decks, end_hand, ace_hard_p = 0, ace_hard_d=0, playerValueInitial, ace_soft = 0;
 let dealerValue = 0, playerValue = 0, aces_d = false, aces_p = false, stop =false, notempty = false, hidden, hidden_symbol;
 initial();
+deck = multiply_array(deck, num_of_decks);
 shuffle(deck, shuffled);
 function hit(){
     addCard('playerCards');
@@ -18,6 +19,7 @@ function showHidden(){
     ace_hard_d = playerValue+10;  // A 1 1 10
   }else ace_hard_d = playerValue; // AA 1 1
   document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue;
+  value = count(hidden);
   card_num++;// pointing to the next card in deck
   place.appendChild(card);
 }
@@ -41,6 +43,13 @@ function gameResult(){
   }else{
     alert("dealer won: "+ dealerValue);
   }
+  if((shuffled.length-card_num)<10){ // shuffleDeck?
+    shuffle(deck, shuffled);
+    alert("Deck shuffling");
+    card_num = 0;
+    value = 0;
+  }
+  deactivateBtn('btn_bet', false);  // activate btn bet again
   //alert(`playerValue: ${playerValue}\n dealerValue: ${dealerValue}`)
   // return compare playerValue and dealerValue
 }
@@ -71,7 +80,7 @@ function addCard(place_id){ // deal card to player or dealer
       end_hand = true;
     }else if(dealerValue==21 || ace_hard_d==21){
       document.getElementById('dealerValue').innerHTML = "Dealer: 21!";
-      dealerValue=21;
+      dealerValue = 21;
       end_hand = true;
     }else
     {// let result = ace_hard < 21 ? ace_hard : playerValue;         // working
@@ -103,14 +112,16 @@ function addCard(place_id){ // deal card to player or dealer
       playerValue = ace_hard_p < 21 ? ace_hard_p : playerValue;
       document.getElementById('playerValue').innerHTML = "Player: " + playerValue}     // working with result
     }
+    value = count(shuffled[card_num][0]);
     card_num++;// pointing to the next card in deck
     place.appendChild(card);
   }
 }
 function initialDeal(){
+  deactivateBtn('btn_bet', true);
+  deactivateBtn('btn_hit', false);
+  deactivateBtn('btn_stand', false);
   if(notempty){
-    deactivateBtn('btn_hit', false);
-    deactivateBtn('btn_stand', false);
     playerValue = 0;
     dealerValue = 0;
     aces_p = false;
@@ -148,26 +159,7 @@ function initialDeal(){
 
 }
 function initial(){ //  initial conditions - create one unshuffled deck
-  deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
-  ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
-  ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
-  ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
-  ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
-  ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
-  ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
-  ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces_p for testing
-// deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+//   deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
 //   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
 //   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
 //   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
@@ -176,14 +168,33 @@ function initial(){ //  initial conditions - create one unshuffled deck
 //   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
 //   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
 //   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-//   ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
-//   ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
-//   ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
-//   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+// ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces_p for testing
+deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+  ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
+  ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
+  ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
+  ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
+  ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
+  ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
+  ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
+  ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
+  ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
+  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
   shuffled = [];
   card_num = 0;
   value = 0;
-  num_of_decks = 1; //default declaration number of decs
+  num_of_decks = 4; //default declaration number of decs
   end = false;
 }
 function start(decks){
@@ -230,12 +241,14 @@ function question(){
 function count(cards){
   var minus = ["10", "J", "Q", "K", "A"];
   var plus = ["2","3","4","5","6"];
-
-  if(minus.includes(cards[card_num][0])){
+  //alert(shuffled[cards][0]);
+  if(minus.includes(cards)){
     value--;
-  }else if(plus.includes(cards[card_num][0])){
+  }else if(plus.includes(cards)){
     value++;
   }
+  //alert(value);
+  return value;
   //console.log(card_num + "Val:" + value);   show value in console
 }
 function rand(min, max){
@@ -276,6 +289,7 @@ function addCardinitial(place_id){
   }else ace_hard = playerValue; // AA 1 1
   document.getElementById('playerValue').innerHTML = "Player: " + ace_hard;
   playerValueInitial = ace_hard;
+  value = count(shuffled[card_num][0]);
   card_num++;// pointing to the next card in deck
   place.appendChild(card);
 }

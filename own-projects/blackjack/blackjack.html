@@ -5,6 +5,8 @@
 </head>
 <body>
 	<div class="frame">
+		<a target="_blank" href="https://wizardofodds.com/games/blackjack/basics/">Rules</a>
+		<a target="_blank" href="https://wizardofodds.com/games/blackjack/strategy/4-decks/">Strategy to beat dealer</a>
 		<div class="playground">
 			<div id="dealerValue">Dealer: 0</div>
 			<div id="dealerCards" class="dealerCards">
@@ -15,19 +17,19 @@
 
 		</div>
 		<div class="options">
-			Choose number of decks:
+			<!--Choose number of decks:
 	    <button class = "btn_decs1" onclick="start(1)">1</button>
 	    <button class = "btn_decs2" onclick="start(2)">2</button>
 	    <button class = "btn_decs4" onclick="start(4)">4</button>
 	    <button class = "btn_decs6" onclick="start(6)">6</button>
 	    <button class = "btn_decs8" onclick="start(8)">8</button>
-		</div>
+		</div> -->
 	<div>Your money balance: </div>
 	<button id="btn_bet" class = "btn_bet" onclick="initialDeal()">Bet</button>
 	<input type="number" class = "bet" min="1" max="10000"></input><br>
-  <button id="btn_hit" class = "btn_hit" onclick="hit()">Hit</button>
-	<button id="btn_stand" class = "btn_stand" onclick="stand()">Stand</button>
-	<button id="btn_double" class = "btn_double" onclick="double()">Double</button>
+  <button disabled id="btn_hit" class = "btn_hit" onclick="hit()">Hit</button>
+	<button disabled id="btn_stand" class = "btn_stand" onclick="stand()">Stand</button>
+	<button disabled id="btn_double" class = "btn_double" onclick="double()">Double</button>
   <div>
 
   </div>

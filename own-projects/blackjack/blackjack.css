@@ -58,11 +58,7 @@ background: green;
   width: 25px;
 }
 .btn_hit{
-  padding:10px;
-  border-radius: 20px;
-  border: solid white 3px;
-  background: gray;
-  text-align: center;
+
 }
 .btn_hit:hover{
   background: rgba(255, 255, 0, 0.9);
