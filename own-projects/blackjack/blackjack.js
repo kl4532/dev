@@ -1,49 +1,107 @@
-let deck, shuffled, card_num, value, num_of_decks, end_hand, ace_hard = 0, ace_soft = 0;
-let dealerValue = 0, playerValue = 0, aces = false, stop =false, notempty = false, acesSubstracted=false;
+let deck, shuffled, card_num, value, num_of_decks, end_hand, ace_hard_p = 0, ace_hard_d=0, playerValueInitial, ace_soft = 0;
+let dealerValue = 0, playerValue = 0, aces_d = false, aces_p = false, stop =false, notempty = false, hidden, hidden_symbol;
 initial();
 shuffle(deck, shuffled);
 function hit(){
     addCard('playerCards');
 }
-
-//count every ace as 1, then, if you found an ace, and the total < 12, add 10.
+function showHidden(){
+  document.getElementById("hidden").parentNode.removeChild(document.getElementById("hidden")); // remove cover for hidden card
+  let place = document.getElementById("dealerCards");
+  let card = document.createElement("div");
+  card.setAttribute("class", "card");
+  card.innerHTML ='<img id="symbol-top" class="symbol-top" src= "./images/'+ hidden_symbol + '.png"/><div id="symbol-num" class="symbol-num">'+hidden+'</div><img id="symbol-bottom" class="symbol-bottom" src= "./images/'+ hidden_symbol + '.png"/>'
+  place.appendChild(card); // show hidden card
+  hidden=="A" ? aces_d=true : aces_d=aces_d;
+  dealerValue += cardNumericalValue(hidden);
+  if(aces_d){
+    ace_hard_d = playerValue+10;  // A 1 1 10
+  }else ace_hard_d = playerValue; // AA 1 1
+  document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue;
+  card_num++;// pointing to the next card in deck
+  place.appendChild(card);
+}
+function stand(){ // after player finish, dealing cards for dealer side
+  deactivateBtn('btn_stand', true);
+  deactivateBtn('btn_hit', true);
+  showHidden();
+  ace_hard = 0;
+  while(dealerValue<17){
+    let i = 500;
+    addCard('dealerCards');
+    i +=500;
+  }
+  gameResult();
+}
+function gameResult(){
+  if((dealerValue>21 || playerValue>dealerValue) && playerValue<=21){
+    alert("player won");
+  }else if(dealerValue==playerValue){
+    alert("push");
+  }else{
+    alert("dealer won: "+ dealerValue);
+  }
+  //alert(`playerValue: ${playerValue}\n dealerValue: ${dealerValue}`)
+  // return compare playerValue and dealerValue
+}
 function addCard(place_id){ // deal card to player or dealer
-  notempty = true;
-  if(place_id=="hidden"){ // request for hidden card(only once for dealer)
+  if(place_id=="hidden"){ // add hidden card(only once and for dealer)
     let place = document.getElementById("dealerCards");
     let card = document.createElement("div");
     card.setAttribute("class", "card");
+    card.setAttribute("id", "hidden");
     place.appendChild(card);
-  }else{
-  let place = document.getElementById(place_id);
+    hidden = shuffled[card_num][0];
+    hidden_symbol = shuffled[card_num][1];
+    card_num++;
+  }else{  // if place id == dealer or player
+  let place = document.getElementById(place_id);  // create card
   let card = document.createElement("div");
   card.setAttribute("class", "card");
   card.innerHTML ='<img id="symbol-top" class="symbol-top" src= "./images/'+ shuffled[card_num][1] + '.png"/><div id="symbol-num" class="symbol-num">'+shuffled[card_num][0]+'</div><img id="symbol-bottom" class="symbol-bottom" src= "./images/'+ shuffled[card_num][1] + '.png"/>'
-  if(place_id=="dealerCards"){
+  if(place_id=="dealerCards"){      // add for dealer
     dealerValue += cardNumericalValue(shuffled[card_num][0]);
-    document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue;
-  }else{
+    shuffled[card_num][0]=="A" ? aces_d=true : aces_d=aces_d;
+    if(aces_d){
+      ace_hard_d = dealerValue+10;
+    }else ace_hard_d = dealerValue;
+    if(ace_hard_d >21 && dealerValue>21)
+    {
+      document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue;
+      end_hand = true;
+    }else if(dealerValue==21 || ace_hard_d==21){
+      document.getElementById('dealerValue').innerHTML = "Dealer: 21!";
+      dealerValue=21;
+      end_hand = true;
+    }else
+    {// let result = ace_hard < 21 ? ace_hard : playerValue;         // working
+      dealerValue = ace_hard_d < 21 ? ace_hard_d : dealerValue;
+      document.getElementById('dealerValue').innerHTML = "Dealer: " + dealerValue}     // working with result
+    }else{ // add for player
     playerValue += cardNumericalValue(shuffled[card_num][0]);
-    //playerValue<12 && shuffled[card_num][0]=="A"
-    shuffled[card_num][0]=="A" ? aces=true : aces=aces;
-    if(aces){
-      ace_hard = playerValue+10;
-      //alert(playerValue + " "+ aces +" "+ ace_hard);
-    }else ace_hard = playerValue;
+    shuffled[card_num][0]=="A" ? aces_p=true : aces_p=aces_p;
+    if(aces_p){
+      ace_hard_p = playerValue+10;
+    }else ace_hard_p = playerValue;
 
-    if(ace_hard >21 && playerValue>21)
+    if(ace_hard_p >21 && playerValue>21)
     {
       document.getElementById('playerValue').innerHTML = "Player: " + playerValue;
-      end_hand = true;
       deactivateBtn('btn_hit', true);
-    }else if(playerValue==21 || ace_hard==21){
+      deactivateBtn('btn_stand', true);
+      showHidden(); // show dealer hidden card after player busted
+      gameResult();
+    }else if(playerValue==21 || ace_hard_p==21){
       document.getElementById('playerValue').innerHTML = "Player: 21!";
-      end_hand = true;
+      playerValue=21;
       deactivateBtn('btn_hit', true);
+      deactivateBtn('btn_stand', true);
+      stand();
     }else
     {
-      let result = ace_hard < 21 ? ace_hard : playerValue;
-      document.getElementById('playerValue').innerHTML = "Player: " + result}
+      // let result = ace_hard < 21 ? ace_hard : playerValue;         // working
+      playerValue = ace_hard_p < 21 ? ace_hard_p : playerValue;
+      document.getElementById('playerValue').innerHTML = "Player: " + playerValue}     // working with result
     }
     card_num++;// pointing to the next card in deck
     place.appendChild(card);
@@ -52,12 +110,15 @@ function addCard(place_id){ // deal card to player or dealer
 function initialDeal(){
   if(notempty){
     deactivateBtn('btn_hit', false);
+    deactivateBtn('btn_stand', false);
     playerValue = 0;
-  dealerValue = 0;
-  aces = false;
-  ace_hard =0;
+    dealerValue = 0;
+    aces_p = false;
+    aces_d = false;
+    ace_hard_p =0;
+    ace_hard_d =0;
   let player = document.getElementById("playerCards");
-  while (player.firstChild) {
+  while (player.firstChild){
   player.removeChild(player.firstChild);
   }
   let dealer = document.getElementById("dealerCards");
@@ -65,27 +126,29 @@ function initialDeal(){
   dealer.removeChild(dealer.firstChild);
   }
 }
-  addCard('playerCards');
-  setTimeout("addCard('playerCards')", 500);
+  notempty = true;
+  addCardinitial('playerCards');
+  setTimeout("addCardinitial('playerCards')", 500);
   setTimeout("addCard('dealerCards')", 1000);
   setTimeout("addCard('hidden');", 1500);
+  setTimeout(function(){ if(playerValueInitial==21){
+    deactivateBtn('btn_hit', true);
+    deactivateBtn('btn_stand', true);
+    stand();
+  }}, 1700)
+
+  // addCardinitial('playerCards');       // without set timeout
+  // addCard('dealerCards');
+  // addCard('hidden');
+  // if(playerValueInitial==21){
+  //   deactivateBtn('btn_hit', true);
+  //   deactivateBtn('btn_stand', true);
+  //   stand();
+  // }
+
 }
 function initial(){ //  initial conditions - create one unshuffled deck
-//   deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
-//   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
-//   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
-//   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
-//   ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
-//   ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
-//   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
-//   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
-//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-//   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-// ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-// ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces for testing
-deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+  deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
@@ -94,10 +157,29 @@ deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
-  ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
-  ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces_p for testing
+// deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
+//   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
+//   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
+//   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
+//   ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
+//   ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
+//   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
+//   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
+//   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+//   ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
+//   ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
+//   ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
+//   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
   shuffled = [];
   card_num = 0;
   value = 0;
@@ -182,3 +264,18 @@ function cardNumericalValue(card){
 function deactivateBtn(btn, on){
   document.getElementById(btn).disabled = on;
 };
+function addCardinitial(place_id){
+  let place = document.getElementById(place_id);  // create card
+  let card = document.createElement("div");
+  card.setAttribute("class", "card");
+  card.innerHTML ='<img id="symbol-top" class="symbol-top" src= "./images/'+ shuffled[card_num][1] + '.png"/><div id="symbol-num" class="symbol-num">'+shuffled[card_num][0]+'</div><img id="symbol-bottom" class="symbol-bottom" src= "./images/'+ shuffled[card_num][1] + '.png"/>'
+  shuffled[card_num][0]=="A" ? aces_p=true : aces_p=aces_p;
+  playerValue += cardNumericalValue(shuffled[card_num][0]); // AA 1 1
+  if(aces_p){
+    ace_hard = playerValue+10;  // A 1 1 10
+  }else ace_hard = playerValue; // AA 1 1
+  document.getElementById('playerValue').innerHTML = "Player: " + ace_hard;
+  playerValueInitial = ace_hard;
+  card_num++;// pointing to the next card in deck
+  place.appendChild(card);
+}
