@@ -24,9 +24,9 @@
 	    <button class = "btn_decs6" onclick="start(6)">6</button>
 	    <button class = "btn_decs8" onclick="start(8)">8</button>
 		</div> -->
-	<div>Your money balance: </div>
+	<div>Your money balance: <span id="balance">500</span></div>
 	<button id="btn_bet" class = "btn_bet" onclick="initialDeal()">Bet</button>
-	<input type="number" class = "bet" min="1" max="10000"></input><br>
+	<input id="bet" type="number" class = "bet" min="1" max="10000" value="10"></input><br>
   <button disabled id="btn_hit" class = "btn_hit" onclick="addCard('playerCards');">Hit</button>
 	<button disabled id="btn_stand" class = "btn_stand" onclick="stand()">Stand</button>
 	<button disabled id="btn_double" class = "btn_double" onclick="double()">Double</button>

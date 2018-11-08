@@ -1,5 +1,6 @@
 let deck, shuffled, card_num, value=0, num_of_decks, ace_hard_p = 0, ace_hard_d=0, ace_soft_p=0, ace_soft_d=0, playerValueInitial, ace_soft = 0;
 let dealerValue = 0, playerValue = 0, aces_d = false, aces_p = false, notempty = false, hidden, hidden_symbol;
+let bet, balance;
 initial();
 deck = multiply_array(deck, num_of_decks);
 shuffle(deck, shuffled);
@@ -30,6 +31,7 @@ function stand(){ // after player finish, dealing cards for dealer side
   deactivateBtn('btn_stand', true);
   deactivateBtn('btn_hit', true);
   showHidden();
+  playerValue = playerValue>playerValueInitial ? playerValue : playerValueInitial; // if player stand after two cards
   ace_hard = 0;
   while(dealerValue<17){
     let i = 500;
@@ -41,11 +43,14 @@ function stand(){ // after player finish, dealing cards for dealer side
 function gameResult(){
   if((dealerValue>21 || playerValue>dealerValue) && playerValue<=21){
     alert("player won");
+    balance+=2*bet;
   }else if(dealerValue==playerValue){
     alert("push");
+    balance+=1*bet;
   }else{
     alert("dealer won: "+ dealerValue);
   }
+  document.getElementById("balance").innerHTML=balance;
   if((shuffled.length-card_num)<10){ // shuffleDeck?
     shuffle(deck, shuffled);
     alert("Deck shuffling");
@@ -120,6 +125,11 @@ function addCard(place_id){ // deal card to player or dealer
   }
 }
 function initialDeal(){
+  bet = document.getElementById("bet").value;
+  balance = document.getElementById("balance").innerHTML;
+  if(bet<=balance){
+  balance -= bet;
+  document.getElementById("balance").innerHTML = balance;
   deactivateBtn('btn_bet', true);
   deactivateBtn('btn_hit', false);
   deactivateBtn('btn_stand', false);
@@ -150,6 +160,11 @@ function initialDeal(){
     playerValue=21;
     stand();
   }}, 1700)
+}else{
+  alert("You don't have enough money...");
+  console.log(bet);
+  console.log(balance);
+}
 }
 function initial(){ //  initial conditions - create one unshuffled deck
   // deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
