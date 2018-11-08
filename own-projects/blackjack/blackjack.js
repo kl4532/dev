@@ -50,7 +50,7 @@ function gameResult(){
   }else{
     alert("dealer won: "+ dealerValue);
   }
-  document.getElementById("balance").innerHTML=balance;
+  document.getElementById("balance").innerHTML = balance;
   if((shuffled.length-card_num)<10){ // shuffleDeck?
     shuffle(deck, shuffled);
     alert("Deck shuffling");
@@ -125,8 +125,9 @@ function addCard(place_id){ // deal card to player or dealer
   }
 }
 function initialDeal(){
-  bet = document.getElementById("bet").value;
-  balance = document.getElementById("balance").innerHTML;
+  bet = parseInt(document.getElementById("bet").value);
+  balance = parseInt(document.getElementById("balance").innerHTML);
+  console.log(`bet: ${typeof bet}\nbalance: ${typeof balance}`);
   if(bet<=balance){
   balance -= bet;
   document.getElementById("balance").innerHTML = balance;
