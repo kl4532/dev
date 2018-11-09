@@ -5,13 +5,11 @@
 </head>
 <body>
 	<div class="frame">
-		<a target="_blank" href="https://wizardofodds.com/games/blackjack/basics/">Rules</a>
-		<a target="_blank" href="https://wizardofodds.com/games/blackjack/strategy/4-decks/">Strategy to beat dealer</a>
 		<div class="playground">
-			<div id="dealerValue">Dealer: 0</div>
+			<div id="dealerValue" class="dealerValue">Dealer: 0</div>
 			<div id="dealerCards" class="dealerCards">
 			</div>
-			<div id="playerValue">Player: 0</div>
+			<div id="playerValue" class="playerValue">Player: 0</div>
 			<div id="playerCards" class="playerCards">
 			</div>
 
@@ -24,23 +22,22 @@
 	    <button class = "btn_decs6" onclick="start(6)">6</button>
 	    <button class = "btn_decs8" onclick="start(8)">8</button>
 		</div> -->
-	<div>Your money balance: <span id="balance">500</span></div>
-	<button id="btn_bet" class = "btn_bet" onclick="initialDeal()">Bet</button>
-	<input id="bet" type="number" class = "bet" min="1" max="10000" value="10"></input><br>
-  <button disabled id="btn_hit" class = "btn_hit" onclick="addCard('playerCards');">Hit</button>
-	<button disabled id="btn_stand" class = "btn_stand" onclick="stand()">Stand</button>
-	<button disabled id="btn_double" class = "btn_double" onclick="double()">Double</button>
+	<div class="bank">Bank: <span id="balance"></span></div>
+	<button id="btn_bet" class = "btn btn_bet" onclick="initialDeal()">Bet</button>
+	<input id="bet" type="number" class = "bet" min="5"  value="10"></input><br>
+  <button disabled id="btn_hit" class = "btn btn_hit" onclick="addCard('playerCards');">Hit</button>
+	<button disabled id="btn_stand" class = "btn btn_stand" onclick="stand()">Stand</button>
+	<!-- <button disabled id="btn_double" class = "btn_double" onclick="double()">Double</button>
+	-->
   <div>
 
   </div>
-	<span id="hints">Show hints</span>
-  <span id="dealed">Dealed: 0</span>
-  <button class = "btn_check" onclick="check_value()">Check value</button>
+  <button class = "btn_check" onclick="check_value()">Hint</button>
 
 
   </div>
 
-
+</div>
 <script src="blackjack.js"></script>
 </body>
 

@@ -49,6 +49,7 @@ function showWinner(winnerId){
   }else document.getElementById(winnerId).style.backgroundColor = "yellow";
 }
 function gameResult(){
+  dealerValue = (ace_hard_d <= 21 ? ace_hard_d : ace_soft_d);
   if((dealerValue>21 || playerValue>dealerValue) && playerValue<=21){
     showWinner('playerValue');
     console.log(`Status: \nd: ${dealerValue}\np: ${playerValue}\npIni: ${playerValueInitial}`);
@@ -138,13 +139,13 @@ function initialDeal(){
   showWinner("none");
   bet = parseInt(document.getElementById("bet").value);
   balance = parseInt(document.getElementById("balance").innerHTML);
-  //console.log(`bet: ${typeof bet}\nbalance: ${typeof balance}`);
-  if(bet<=balance && bet>0){
+  console.log(`bet: ${typeof bet}\nbalance: ${typeof balance}`);
+  if(bet<=balance && bet>4){
   balance -= bet;
   document.getElementById("balance").innerHTML = balance;
+  document.getElementById("dealerValue").innerHTML = "Dealer: 0";
+  document.getElementById("playerValue").innerHTML = "Player: 0";
   deactivateBtn('btn_bet', true);
-  deactivateBtn('btn_hit', false);
-  deactivateBtn('btn_stand', false);
   if(notempty){ // set initial values and clear board if not first deal
     playerValue = 0;
     dealerValue = 0;
@@ -172,46 +173,41 @@ function initialDeal(){
     playerValue=21;
     stand();
   }}, 1700)
-}else if(bet<=0){
-  alert("Bet have to be greater than 0...");
+  setTimeout(function(){deactivateBtn('btn_hit', false);  // activate buttons after cards dealed
+  deactivateBtn('btn_stand', false);},2000);
+
+}else if(bet<=5){
+  alert("Bet has to be greater than 5...");
 }else{
   alert("You don't have enough money...");
 }
 }
 function initial(){ //  initial conditions - create one unshuffled deck
+  // deck = [
+  // ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+  // ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+  // ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
+  // ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
+  // ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces_p for testing
   deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
-  ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
-  ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
-  ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-  ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-  ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"],
-  ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"],
-  ["A", "spade"], ["A", "spade"], ["A", "spade"], ["A", "spade"]];  // added extra aces_p for testing
-  // deck = [["2", "heart"], ["2", "diamond"], ["2", "club"] , ["2", "spade"],
-  //   ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
-  //   ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
-  //   ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
-  //   ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
-  //   ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
-  //   ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
-  //   ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
-  //   ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
-  //   ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
-  //   ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
-  //   ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
-  //   ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
+    ["3", "heart"], ["3", "diamond"], ["3", "club"] , ["3", "spade"],
+    ["4", "heart"], ["4", "diamond"], ["4", "club"] , ["4", "spade"],
+    ["5", "heart"], ["5", "diamond"], ["5", "club"] , ["5", "spade"],
+    ["6", "heart"], ["6", "diamond"], ["6", "club"] , ["6", "spade"],
+    ["7", "heart"], ["7", "diamond"], ["7", "club"] , ["7", "spade"],
+    ["8", "heart"], ["8", "diamond"], ["8", "club"] , ["8", "spade"],
+    ["9", "heart"], ["9", "diamond"], ["9", "club"] , ["9", "spade"],
+    ["10", "heart"], ["10", "diamond"], ["10", "club"] , ["10", "spade"],
+    ["J", "heart"], ["J", "diamond"], ["J", "club"] , ["J", "spade"],
+    ["Q", "heart"], ["Q", "diamond"], ["Q", "club"] , ["Q", "spade"],
+    ["K", "heart"], ["K", "diamond"], ["K", "club"] , ["K", "spade"],
+    ["A", "heart"], ["A", "diamond"], ["A", "club"] , ["A", "spade"]];
   shuffled = [];
   card_num = 0;
   value = 0;
-  num_of_decks = 4; //default declaration number of decs
+  num_of_decks = 6; //default declaration number of decs
   end = false;
+  document.getElementById('balance').innerHTML = "500";
 }
 function start(decks){
   document.getElementById('num').innerHTML = decks + "d";
@@ -281,8 +277,8 @@ function multiply_array(arr, n){
   return new_arr;
 }
 function check_value(){
-  alert("Card dealed: " + card_num + "/" + shuffled.length + "\n" + "Value: " + value);
-}
+  alert(`Card dealed: ${card_num}/${shuffled.length}\nValue: ${value}\nYou are playing with ${num_of_decks} decks`);
+}//https://wizardofodds.com/games/blackjack/basics/
 function cardNumericalValue(card){
   if(card=="J"||card=="Q"||card=="K"){
     return 10;

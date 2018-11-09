@@ -1,92 +1,105 @@
 body{
-background: green;
--webkit-touch-callout: none;
     -webkit-user-select: none;
-     -khtml-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
+
+background: gray;
+
+-webkit-touch-callout: none;
+     -khtml-user-select: none;
 }
 .frame{
-  min-width: 1000px;
-  width: 1000px;
   margin: auto;
+  width: 860px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-.dealerCards{
-  width: 820px;
-  min-width: 820px;
-  height: 200px;
-  background: brown;
+.playground{
+  float: left;
+  min-width: 500px;
+  max-width: 850px;
+  background: green;
+  border: solid #2d1a00 10px;
+  border-radius: 10px;
 }
-.playerCards{
-  width: 820px;
-  min-width: 820px;
-  height: 200px;
-  background: blue;
+.dealerCards, .playerCards{
+  height: 120px;
+  border: solid white 2px;
+  border-radius: 10px;
+  padding: 10px;
 }
 .card{
   position: relative;
-  background: white;
-  color: black;
+  display: inline-block;
   width: 70px;
   min-width: 70px;
   height: 100px;
-  border-radius: 10%;
+  color: black;
   border: double 10px;
-  display: inline-block;
+  border-radius: 10%;
+  background: white;
 }
 .symbol-top{
   position: absolute;
   top: 0;
   left: 0;
+
   width: 25px;
 }
 .symbol-num{
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
   font-size: 30px;
-
 }
 .symbol-bottom{
   position: absolute;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+
   width: 25px;
 }
-.btn_hit{
+.btn {
+border-radius: 4px;
+padding: 10px;
+border: solid gray 1px;
+}
+.btn:hover {
+  background-color: yellow;
+}
+.btn_hit {
+background: #66ff33;
+font-weight: bold;
+width: 75px;
+}
+.btn_stand{
+background: red;
+font-weight: bold;
+width: 75px;
+}
+.btn_bet{
+font-weight: bold;
+width: 70px;
+}
+.bet{   /* for input*/
+width: 70px;
+font-size: 20px;
+padding: 2px;
+}
 
-}
-.btn_hit:hover{
-  background: rgba(255, 255, 0, 0.9);
-}
-.btn_decs1{
-  border-radius: 100%;
-  background: #ffcccc;
-}
-.btn_decs1{
-  border-radius: 100%;
-  background: #ffcccc;
-}
-.btn_decs2{
-  border-radius: 100%;
-  background: #ff9999;
-}
-.btn_decs4{
-  border-radius: 100%;
-  background: #ff6666;
-}
-.btn_decs6{
-  border-radius: 100%;
-  background: #ff3333;
-}
-.btn_decs8{
-  border-radius: 100%;
-  background: #ff0000;
+.bank{
+  font-size: 20px;
+  font-weight: bold;
+  color: gold;
 }
 .btn_check{
-  display: inline;
+  width: 153px;
+  font-style: italic;
 }
