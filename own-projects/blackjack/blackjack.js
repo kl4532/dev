@@ -50,6 +50,7 @@ function showWinner(winnerId){
 }
 function gameResult(){
   dealerValue = (ace_hard_d <= 21 ? ace_hard_d : ace_soft_d);
+  playerValue = (ace_hard_p <= 21 ? ace_hard_p : ace_soft_p);
   if((dealerValue>21 || playerValue>dealerValue) && playerValue<=21){
     showWinner('playerValue');
     console.log(`Status: \nd: ${dealerValue}\np: ${playerValue}\npIni: ${playerValueInitial}`);
