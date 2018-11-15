@@ -2,37 +2,38 @@ body{
   background: #6800E0;
   color: white;
 }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-.column {
-  flex: 5%;
-  padding: 0 4px;
-}
+.container {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-gap: 10px;
+  position: absolute;
 
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  max-width: 100%;
-  max-width: 100%;
+}
+img {
+  width: 100%;
+  height: auto;
 }
 h1{
   text-align: center;
 }
 a:link {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 button{
   border-radius: 15px;
   background: white;
 }
-@media screen and (max-width: 800px) {
-      .column {
-          -ms-flex: 50%;
-          flex: 50%;
-          max-width: 100%;
+@media screen and (max-width: 1000px) {
+      .container {
+          grid-template-columns: 30% 30% 30%;
+      }
+}
+@media screen and (max-width: 600px) {
+      .container {
+          grid-template-columns: 100%;
+      }
+      img{
+        width: 100%;
       }
 }
