@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <title>CornyChat</title>
+    <link href="/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="frame-chat">
+      <div id="chat-window">
+        <div id="output"></div>
+        <div id="feedback"></div>
+      </div>
+      <input class="inp" id="handle" type="text" placeholder="Your nick">
+      <div class="mssg-btn">
+        <textarea  class="mssg" id="message" name="Text1" cols="40" rows="1" placeholder="Message"></textarea>
+        <button id="send">Send</button>
+      </div>
+
+    </div>
+    <script src="/chat.js"></script>
+  </body>
+</html>
