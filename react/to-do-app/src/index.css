@@ -1,6 +1,14 @@
 body{
 text-align: center;
+background: #66ff66;
        }
+.frame{
+  border-style: inset;
+  margin-left: 300px;
+  margin-right: 300px;
+  background: white;
+  min-height: 300px;
+}
 .items{
   margin: 0 auto;
   width: 700px;

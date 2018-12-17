@@ -77,7 +77,7 @@ class MyToDoList extends React.Component {
       </div>
     });
     return (
-      <div>
+      <div className="frame">
         <input
           onChange={this.handleChange}
           value={this.state.userInput}
