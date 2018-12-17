@@ -52,7 +52,7 @@ class MyToDoList extends React.Component {
    }
   }
   checkHandle(index){
-    this.state.toDoList[index].checked = this.state.toDoList[index].checked ? false : true;
+    this.state.toDoList[index].checked = !this.state.toDoList[index].checked;
     this.forceUpdate();
   }
   render() {
