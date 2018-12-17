@@ -8,7 +8,6 @@ class MyToDoList extends React.Component {
     this.state = {
       userInput: '',
       toDoList: [],
-      checked: [],
     }
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDel = this.handleDel.bind(this);
@@ -18,27 +17,22 @@ class MyToDoList extends React.Component {
   }
   handleAdd() {
     const newTask = this.state.userInput;
+    let isAlredy = false;
+    this.state.toDoList.map(item => {     // I need to check if there is alredy task equal to newTask in one of toDoList elements
+      !isAlredy ? (item.task === newTask ? isAlredy=true : isAlredy=isAlredy) : isAlredy=isAlredy;
+    })
     if(newTask!==''){
-      if(!this.state.toDoList.includes(newTask)){
+      if(!isAlredy){  // includes method works only for simple elements in array, not objects
         this.setState(prevState => ({
-          toDoList: [...prevState.toDoList, newTask],
+          toDoList: [...prevState.toDoList, {task: newTask, checked: false}],
           userInput: '',
             }))
-            this.setState(prevState => ({
-              checked: [...prevState.checked, false],
-                }))
-      }else alert(newTask + " is alredy on your list...");
+      }else alert(newTask + " is alredy on your list..." + "list:");
     }
   }
-  handleDel(item, index){
-    this.state.checked.splice(index, 1);
-      this.setState({
-        checked: this.state.checked,
-      });
-  let filteredArray = this.state.toDoList.filter(i=> i !== item);
-    this.setState({
-      toDoList: filteredArray,
-    });
+  handleDel(index){
+  this.state.toDoList.splice(index, 1);
+  this.forceUpdate();
 }
   handleChange(e) {
     this.setState({
@@ -57,22 +51,17 @@ class MyToDoList extends React.Component {
      this.handleAdd();
    }
   }
-  checkHandle(gIndex){
-    this.setState({
-     checked: this.state.checked.map((item, index) =>{
-       if(gIndex === index){  //mapping checkboxed array. For selected checkbox change value of checked for opposite
-         return !item;
-       } else return item;
-     })
-   })
+  checkHandle(index){
+    this.state.toDoList[index].checked = this.state.toDoList[index].checked ? false : true;
+    this.forceUpdate();
   }
   render() {
     const items = this.state.toDoList.map((item, index) => {
-      return <div key={item} className = 'item'>
+      return <div key={item.task} className = 'item'>
         <li>
-            <button  value={item} onClick={() => this.handleDel(item, index)} className="itemBtn">X</button>
-              {this.state.checked[index] ?<div style={{textDecoration: "line-through"}}>{item}</div>: item}
-            <input className="checkbox" type="checkbox" checked={ this.state.checked[index] } onChange={ () => this.checkHandle(index)}/>
+            <button  value={item.task} onClick={() => this.handleDel(index)} className="itemBtn">X</button>
+              {item.checked ?<div style={{textDecoration: "line-through"}}>{item.task}</div>: item.task}
+            <input className="checkbox" type="checkbox" checked={ item.checked } onChange={ () => this.checkHandle(index)}/>
         </li>
       </div>
     });
