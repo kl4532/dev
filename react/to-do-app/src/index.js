@@ -27,7 +27,7 @@ class MyToDoList extends React.Component {
           toDoList: [...prevState.toDoList, {task: newTask, checked: false}],
           userInput: '',
             }))
-      }else alert(newTask + " is alredy on your list..." + "list:");
+      }else alert(newTask + " is alredy on your list...");
     }
   }
   handleDel(index){
