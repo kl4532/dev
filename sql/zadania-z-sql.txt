@@ -1,0 +1,49 @@
+Baza danych dla formuły 1. 
+
+Słówa kluczowe w SQL możan pisać dużymi i małymi literami - nie ma znaczenia, ale standartem są duże litery. Zapytania które tworzysz są jednorazowe - potrzebujesz ich na jeden raz, jak tworzenie tabeli - więc nie są nigdzie w sql zapisywane - zapisują się tylko ich efekty i to nie zawsze. Tak że lepij sobie to wszystko zapisz na dysk żebyś nie zapomniał :) Komentarze się robią albo # albo --, już nie pamiętam. 
+
+Powinno tam być w bazie trzy tabele {CREATE TABLE}:
+1)Zespoły
+    Kolumny:
+        Id - zawsze powinno być, w każdej tabeli {PRIMARY KEY (klucz glowny)}
+        Name - {Constraints, UNIQE, NOTNULL}
+        dalej nieistotne, możesz dodać swoje kolumny
+2)Kierowcy 
+    Kolumny:
+        Id 
+        Imie
+        Nazwisko
+        Kraj_pochozdenia - właśnie tak z literówką ;)
+        Zespoł - link do zespołu - {FOREING KEY (klucz glowny)}co wyżej
+        Rok_urodzenia
+        dalej nieważne
+3)Samochody
+    Kolumny:
+        Id 
+        Zespół - link do zespołu
+        TopSpeed
+        dalej nieważne
+
+1) Stworzyć te trzy tabele z kolumnami i ograniczeniami (constraints)
+2) Wpisać przykładowe dane do tabel. Najlepiej zacząć z tabeli Zespoły, ponieważ nie ma zależności od innych tabel {INSERT INTO}. Do tabeli kierowcy dodać co najmniej 2 z jednakowym krajem pochodzenia
+3) Wyświetlić zawartość tabel {SELECT}
+4) Zauważyć literówkę z tabeli Kierowcy - naprawić poleceniem {ALTER TABLE}
+5) Stworzyć niepotrzebną tabele i jej skasować {DROP TABLE}
+
+Praca z danymi:
+1) Wyświetlić tylko kierowców z Polskiej {SELECT ... WHERE}
+2) Wyświetlić tylko samochody, które mają pojemność silnika wyżej wartości X (sam wybież X, nie znam się xD)
+3) Wyświetlić tylko imiona i nazwiska kierowców, posortowane alfabetycznie (najpierw wg Nazwiska)
+4) Napisać zapytanie które zwróci jedną kolumnę "Imie i Nazwisko" ze złączonymi Imieniem i  Nazwiskiem z tabeli Kierowcy {CONCAT lub coś podobnego + alias, AS}
+5) Wyświetlić wszystkie kraje pochodzenia kierówców, żeby się nie powtarzały (jeśli i tak się nie powtarzają to wybrać inną kolumnę gdzie jest co najmniej dwie takie same wartości) 
+6) Wyświetlić tylko kierowców, których nazwiska zaczynają się na K {LIKE}
+7) Ile jest kierowców powyżej 30 roku życia? {COUNT}
+Teraz trochę weselej:
+8) Napisać zapytanie, które zwróci dwie kolumny - Imie_i_Nazwisko (złączone kolumny Imie i Nazwisko z tabeli kierowcy, jak w zadaniu 4) i nazwa zespołu w którym jeździ. {JOIN}
+9) Wyświetlić wszystkie samochody zespołu BMW
+10) Zmienić jeden wybrany wiersz wybranej kolumy {UPDATE}
+11) Do nazwiska wszystkich kierowców Wiliams dodać na końcu wykrzyknik - trochę trudniejsze, UPDATE i JOIN 
+12) Napisać zapytanie, które zwróci dwie kolumny: Kraj_pochodzenia i ilość kierowców, którzy z tego kraju pochodzą {GROUP BY} - bardziej zaawansowne, dla podstaw tego nie potrzebujesz, ale będzie fajnie jak też będziesz umiał, tak samo też następne zadanie.
+13) Dodać do poprzedniego zapytania ograniczenie: nich wypisuje tylko te kraje, w których ilość kierowców jest więcej niż 2 {GROUP BY ... HAVING}
+
+Have fun ;)
