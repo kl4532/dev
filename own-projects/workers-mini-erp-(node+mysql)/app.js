@@ -91,7 +91,7 @@ app.post('/worker/:id/send', urlencodedParser, function (req, res) {
     secure: true,
     auth: {
       user: "cornytesto@gmail.com", // default mail for site
-      pass: "kaban777"
+      pass: "xxx"// to change
     }
   });
   mailOpts = {
