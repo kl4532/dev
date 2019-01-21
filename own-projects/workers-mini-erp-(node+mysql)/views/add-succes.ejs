@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      body{background: skyblue;
+      color: white;
+    padding: 30px;
+  text-align: center;}
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <h2>Worker added to database!</h2>
+    <p>You added <strong><%=data.who %></strong>
+    from the <strong><%= data.department %></strong> department</p>
+  </body>
+</html>

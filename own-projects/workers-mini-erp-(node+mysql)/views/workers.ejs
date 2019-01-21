@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      body{background: skyblue;
+      color: white;
+    padding: 30px;
+  text-align: center;}
+  table{
+  width: 40%;
+  background-color: #fff;
+  margin: auto;
+  color: black;
+}
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <table>
+      <tr>
+          <th>ID</th>
+          <th>Surname</th>
+          <th>Department</th>
+          <th>Email</th>
+      </tr>
+      <% data.forEach(function(col){ %>
+          <tr>
+            <td><a href="/worker/<%= col.id %>"><%= col.id %></a></td>
+            <td><%= col.surname %></td>
+            <td><%= col.department %></td>
+            <td><%= col.email %></td>
+          </tr>
+      <% }); %>
+    </table>
+  </body>
+</html>
