@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      body{background: skyblue;
+      color: white;
+    padding: 30px;
+  text-align: center;}
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <table>
+      <tr>
+          <th>ID</th>
+          <th>Surname</th>
+          <th>Department</th>
+          <th>Email</th>
+      </tr>
+          <tr>
+            <td><%= data.id %></td>
+            <td><%= data.surname %></td>
+            <td><%= data.department %></td>
+            <td><%= data.email %></td>
+          </tr>
+    </table>
+    <form id="del-form" method="GET" action='/worker/delworker/<%= data.id %>' onsubmit="return confirm('Are you sure you want to delete <%= data.surname %>?');">
+      <label type="text">Delete</label>
+      <input type="submit" value="X"/>
+    </form>
+    <form action="/worker/<%= data.id %>/send" id="send" method="POST" role="form">
+      <fieldset>
+        <label>Subject</label>
+          <input for="subject" type="text" name="subject"  placeholder="Subject" />
+        <label for="message">Message &#42;</label>
+          <textarea for="mssg" id="message" name="mssg" placeholder="Enter your message here" rows="3" required="required"></textarea>
+        <button type="submit">Submit</button>
+        <input for ="email" type="email" name="email" value="<%= data.email %>"/>
+      </fieldset>
+    </form>
+  </body>
+</html>

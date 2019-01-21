@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      body{background: skyblue;
+      color: white;
+    padding: 30px;
+  text-align: center;}
+    </style>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <h1>Add new worker!</h1>
+    <form id="add-form" method="POST" action="/addworker">
+      <label for="who">Worker's surname</label>
+      <input type="text" name="who" value="<%= qs.person %>" pattern="[a-zA-Z]+" required><br><br>
+      <label for="department">Worker's department?</label>
+      <input type="text" name="department" value="<%= qs.dept %>" pattern="[a-zA-Z0-9-]+" required><br><br>
+      <label for="email">Worker's email</label>
+      <input type="email" name="email"/><br><br>
+      <input type="submit" value="submit"/>
+    </form>
+
+    <p><%= qs.prs %></p>
+  </body>
+</html>
