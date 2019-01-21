@@ -1,6 +1,8 @@
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser =require('body-parser');
+var exphb = require('express-handlebars');
+var nodemailer = require('nodemailer');
 
 var app = express();
 
@@ -21,7 +23,7 @@ db.connect((err) =>{
 });
 
 app.set('view engine', 'ejs');
-app.use('/assets', express.static('stuff'));
+app.use('/assets', express.static('stuff')); // tell app where are static files like css, front end stuff, etc
 
 app.get('/', function(req, res){
   res.render('index');
@@ -76,6 +78,35 @@ app.get('/worker/delworker/:id', function(req,res){ //data from form
         console.log(`Worker with id=${personID} deleted succesfully`);
         res.render(`del-succes`, {id: personID} );
       }else res.render(`del-failed`, {id: personID} );
+  });
+});
+
+app.post('/worker/:id/send', urlencodedParser, function (req, res) {
+  let mailOpts, smtpTrans;
+  let data = req.body;
+  // console.log('data ' + data.mssg);
+  smtpTrans = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: "cornytesto@gmail.com", // default mail for site
+      pass: "kaban777"
+    }
+  });
+  mailOpts = {
+    from: "Corny, <cornytesto@gmail.com>",
+    to: data.email, //receiver
+    subject: data.subject,
+    text: data.mssg
+  };
+  smtpTrans.sendMail(mailOpts, function (error, response) {
+    if (error) {
+      res.render('404'); //res.render('contact-failure');
+    }
+    else {
+      res.render('send-succes', {data: data});
+    }
   });
 });
 
