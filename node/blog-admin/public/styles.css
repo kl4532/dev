@@ -1,0 +1,9 @@
+.well {
+border-style:solid;
+}
+body{
+  background: red;
+}
+.center{
+  margin: 100px;
+}

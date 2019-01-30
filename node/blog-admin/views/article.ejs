@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% include partials/nav.ejs %>
+    <div class="well well-lg center">
+      <h2><%= article.title %></h2>
+      <h4>Author: <%= article.author %></h4>
+      <p><%= article.body %></p>
+    </div>
+  </body>
+</html>
