@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <meta charset="utf-8">
     <title></title>
   </head>
@@ -11,6 +11,9 @@
       <h2><%= article.title %></h2>
       <h4>Author: <%= article.author %></h4>
       <p><%= article.body %></p>
+      <a href="/article/edit/<%= article.id %>"><button class="btn btn-info" >edit</button></a>
+      <a href="#" ><button data-id="<%= article.id %>" class="btn btn-danger delete-article" >delete</button></a>
     </div>
+    <script src="/js/main.js" charset="utf-8"></script>
   </body>
 </html>
