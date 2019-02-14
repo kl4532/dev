@@ -1,0 +1,37 @@
+-----------------------------------------------------------
+Server
+-----------------------------------------------------------
+sudo apt-get install lib2cap-bin
+sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``
+pm2 start app.js 		- start running a server permanently
+
+
+-----------------------------------------------------------
+Mongo
+-----------------------------------------------------------
+sudo service mongod start 	- start mongo db
+mongo 				- run mongo
+
+-----------------------------------------------------------
+NPM
+-----------------------------------------------------------
+
+npm init			- create package.json
+npm install			- install dependencies
+
+-----------------------------------------------------------
+Git
+-----------------------------------------------------------
+
+git commit -m "My message"
+git stash 			- push changes like on a stack
+git stash pop			- merge changes
+git clone <repo to clone>
+git checkout --			- if local dir fucked up, download global from github
+
+
+-----------------------------------------------------------
+Others
+-----------------------------------------------------------
+Xampp (Mysql server)		- sudo /opt/lampp/manager-linux-x64.run 
+
