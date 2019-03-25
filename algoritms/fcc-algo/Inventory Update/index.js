@@ -1,3 +1,5 @@
+// Task
+// https://learn.freecodecamp.org/coding-interview-prep/algorithms/inventory-update/
 function updateInventory(arr1, arr2) {
     // All inventory must be accounted for or you're fired!
     let exist = false;
