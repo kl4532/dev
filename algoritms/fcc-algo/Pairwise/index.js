@@ -1,7 +1,7 @@
-let pairs = []; // array of pairs
-let used = []; // for index already used
-let result = 0;
 function pairwise(arr, arg) {
+  let pairs = []; // array of pairs
+  let used = []; // for index already used
+  let result = 0;
   // loop for all combination of paris sum
   for(let i = 0; i< arr.length; i++){
     for(let j = 0; j< arr.length; j++){
